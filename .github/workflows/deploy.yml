@@ -27,7 +27,7 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync build/ s3://luckttery --delete
+          aws s3 sync build/ s3://www.luckttery.com --delete
         env:
           AWS_ACCESS_KEY_ID: ${{ vars.AWS_LUCKTTERY_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_LUCKTTERY_SECRET_KEY }}
