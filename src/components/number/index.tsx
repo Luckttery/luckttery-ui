@@ -1,8 +1,8 @@
-import { CircleContainer, Circle } from "./style";
+import { CircleContainer, Circle } from "./style"
 
 type LottoNumberProps = {
-  numbers: number[];
-};
+  numbers: number[]
+}
 
 const LottoNumber = ({ numbers }: LottoNumberProps) => {
   return (
@@ -13,7 +13,7 @@ const LottoNumber = ({ numbers }: LottoNumberProps) => {
         </Circle>
       ))}
     </CircleContainer>
-  );
-};
+  )
+}
 
-export default LottoNumber;
+export default LottoNumber
