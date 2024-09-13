@@ -1,9 +1,9 @@
 import lucktteryClient from "./client"
 import { ResponsNumber } from "./types"
 
-export const fetchGetNumber = async (data: number): Promise<ResponsNumber> => {
+export const fetchGetNumber = async (number: number, median: number): Promise<ResponsNumber> => {
   try {
-    const response = await lucktteryClient.get(`/lottery/numbers?set_count=${data}`)
+    const response = await lucktteryClient.get(`lotto/recommend?set_count=${number}&median_frequency_percentage=${median}`)
     return response.data
   } catch (error: unknown) {
     throw error
