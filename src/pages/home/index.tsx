@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { StyledContainer, StyledInputField, StyledButton, StyledError, StyledDataContainer, StyledResultList, StyledResultItem } from "./style"
 import { fetchGetNumber } from "../../api/lucktteryApi/api"
+import LottoNumber from "../../components/number"
 
 const Home = () => {
   const [number, setNumber] = useState<number | null>(null)
@@ -58,6 +59,7 @@ const Home = () => {
           <StyledResultList>
             {data.map((num: number[], index: number) => (
               <StyledResultItem key={index}>
+                {<LottoNumber numbers={num}></LottoNumber>}
               </StyledResultItem>
             ))}
           </StyledResultList>
