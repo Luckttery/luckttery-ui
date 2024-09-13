@@ -12,16 +12,23 @@ export const StyledInputField = styled.input`
   margin: 10px 0;
   padding: 10px;
   border: 2px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
 `;
 
 export const StyledButton = styled.button`
-  background-color: #28a745;
+  background-color: #69C8F2;
   color: white;
   border: none;
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: 15px;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
@@ -29,12 +36,12 @@ export const StyledButton = styled.button`
   margin-top: 20px;
 
   &:hover {
-    background-color: #218838;
-    transform: translateY(-2px); /* 살짝 올라가는 효과 */
+    background-color: #58B1D6;
+    transform: translateY(-2px);
   }
 
   &:active {
-    transform: translateY(0); /* 클릭 시 원래 자리로 돌아감 */
+    transform: translateY(0);
   }
 `;
 
@@ -55,9 +62,9 @@ export const StyledResultList = styled.ul`
   list-style-type: none;
   padding: 0;
 `;
-
 export const StyledResultItem = styled.li`
   margin: 10px 0;
+  padding-bottom: 5px;
   font-size: 18px;
   strong {
     font-weight: bold;

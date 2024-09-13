@@ -1,57 +1,72 @@
-import { useState } from "react";
-import { StyledContainer, StyledInputField, StyledButton, StyledError, StyledDataContainer, StyledResultList, StyledResultItem, LogoImage } from "./style";
-import { fetchGetNumber } from "../../api/lucktteryApi/api";
-import logo from '../../assets/logo.png'
+import { useState } from "react"
+import { StyledContainer, StyledInputField, StyledButton, StyledError, StyledDataContainer, StyledResultList, StyledResultItem } from "./style"
+import { fetchGetNumber } from "../../api/lucktteryApi/api"
+import LottoNumber from "../../components/number"
 
 const Home = () => {
-  const [number, setNumber] = useState<number>(1);
-  const [data, setData] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [number, setNumber] = useState<number | null>(null)
+  const [median, setmedian] = useState<number>(50)
+  const [data, setData] = useState<any>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const getData = async () => {
+    if (number == null || number === 0) return alert("세트 수가 입력되지 않았습니다.")
     try {
-      const result = await fetchGetNumber(number);
-      setData(result.sets);
-      setError(null);
-      console.log(data)
+      if (number) {
+        const result = await fetchGetNumber(number, median)
+        setData(result.sets)
+        setError(null)
+      }
     } catch (error) {
-      console.error("Error fetching data:", error);
-      setError("Error fetching data");
+      alert(error)
     }
-  };
+  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNumber(Number(event.target.value));
+    const value = event.target.value
+    setNumber(value ? Number(value) : null)
+  }
+
+  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setmedian(Number(event.target.value));
   };
 
   return (
     <StyledContainer>
-      <LogoImage src={logo}/>
       <StyledInputField
         type="number"
-        value={number}
+        placeholder="세트 수"
+        value={number !== null ? number : ''}
         onChange={handleInputChange}
-        min="1"
       />
-      <StyledButton onClick={() => getData()}>번호 추천받기</StyledButton>
+       <input
+        type="range"
+        min="50"
+        max="100"
+        step="10"
+        value={median}
+        onChange={handleSliderChange}
+        style={{ width: "300px", margin: "20px 0" }}
+      />
+      <StyledButton onClick={() => getData()}>번호 추천 받기</StyledButton>
 
       {error && <StyledError>{error}</StyledError>}
 
       {data && (
         <StyledDataContainer>
           <h2>추천 번호</h2>
+
           <StyledResultList>
             {data.map((num: number[], index: number) => (
               <StyledResultItem key={index}>
-                <strong>Set {index + 1}: </strong>
-                {num.join(", ")}
+                {<LottoNumber numbers={num}></LottoNumber>}
               </StyledResultItem>
             ))}
           </StyledResultList>
         </StyledDataContainer>
       )}
     </StyledContainer>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
