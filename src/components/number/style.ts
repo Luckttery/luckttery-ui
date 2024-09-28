@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 type CircleProps = {
-  number: number
+  $number: number
 }
 
 export const CircleContainer = styled.div`
@@ -14,10 +14,10 @@ export const Circle = styled.div<CircleProps>`
   width: 54px;
   height: 54px;
   background-color: ${(props) => {
-    if (props.number >= 1 && props.number <= 9) return "#FFD83D"
-    if (props.number >= 10 && props.number <= 19) return "#61DAFF"
-    if (props.number >= 20 && props.number <= 29) return "#FF7376"
-    if (props.number >= 30 && props.number <= 39) return "#B9B9B9"
+    if (props.$number >= 1 && props.$number <= 9) return "#FFD83D"
+    if (props.$number >= 10 && props.$number <= 19) return "#61DAFF"
+    if (props.$number >= 20 && props.$number <= 29) return "#FF7376"
+    if (props.$number >= 30 && props.$number <= 39) return "#B9B9B9"
     return "#62D604"
   }};
   border-radius: 50%;
