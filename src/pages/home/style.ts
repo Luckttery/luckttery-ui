@@ -77,3 +77,40 @@ export const LogoImage = styled.img`
   height: 80px;
 `;
 
+export const StyledRangeTrack = styled.div`
+  height: 6px;
+  width: 100%;
+  background-color: #ccc;
+  margin: 20px 0;
+  position: relative;
+`;
+
+// Range 선택된 구간 (색칠된 부분)
+export const StyledRangeSelectedTrack = styled.div<{ $left: number; $width: number }>`
+  position: absolute;
+  height: 100%;
+  background-color: #69c8f2; /* 선택된 범위의 색상 */
+  left: ${(props) => props.$left}%;
+  width: ${(props) => props.$width}%;
+`;
+
+export const StyledRangeThumb = styled.div`
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #69c8f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 6px #aaa;
+`;
+
+export const StyledThumbLabel = styled.div`
+  position: absolute;
+  top: -28px;
+  color: #fff;
+  font-weight: bold;
+  padding: 2px;
+  border-radius: 3px;
+  background-color: #69c8f2;
+`;
