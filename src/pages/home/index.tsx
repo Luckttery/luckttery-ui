@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Range } from "react-range";
 import {
   StyledContainer,
@@ -16,8 +16,10 @@ import {
   StyledRangeSelectedTrack
 } from "./style";
 import LottoNumber from "../../components/number";
-import { fetchGetNumber } from "../../api/lucktteryApi/api";
+import { fetchGetNumber, fetchLatest } from "../../api/lucktteryApi/api";
 import Header from "../../components/Header";
+import { LottoDrawResponse } from "../../api/lucktteryApi/types";
+import { Circle } from "../../components/number/style";
 
 const STEP = 10;
 const MIN = 0;
@@ -26,10 +28,27 @@ const MAX = 100;
 const Home = () => {
   const [number, setNumber] = useState<number | null>(null);
   const [medianRange, setMedianRange] = useState([0, 100]);
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<number[][]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [drawdata, setDrawdata] = useState<LottoDrawResponse>()
 
-  const getData = async () => {
+  useEffect(() => {
+    const getdrawData = async () => {
+      await getLottoDrawData() 
+    }
+    getdrawData()
+  }, [])
+
+  const getLottoDrawData = async () => {
+    try {
+      const result = await fetchLatest()
+      setDrawdata(result)
+    } catch (error){
+      alert(error)
+    }
+  }
+
+  const getLottoData = async () => {
     if (number == null || number === 0) return alert("세트 수가 입력되지 않았습니다.");
     try {
       if (number) {
@@ -53,14 +72,13 @@ const Home = () => {
 
   return (
     <StyledContainer>
-      <Header></Header>
+      <Header/>
       <StyledInputField
         type="number"
         placeholder="세트 수"
         value={number !== null ? number : ""}
         onChange={handleInputChange}
       />
-
       <Range
         step={STEP}
         min={MIN}
@@ -85,11 +103,11 @@ const Home = () => {
         )}
       />
 
-      <StyledButton onClick={() => getData()}>번호 추천 받기</StyledButton>
+      <StyledButton onClick={() => getLottoData()}>번호 추천 받기</StyledButton>
 
       {error && <StyledError>{error}</StyledError>}
 
-      {data && (
+      {data.length !== 0 && (
         <StyledDataContainer>
           <h2>추천 번호</h2>
           <StyledResultList>
@@ -101,6 +119,13 @@ const Home = () => {
           </StyledResultList>
         </StyledDataContainer>
       )}
+
+      <h3>{drawdata?.draw}회 당첨 번호</h3>
+      <LottoNumber numbers={drawdata?.numbers}></LottoNumber>
+      <h2>+</h2>
+      <Circle key={1} $number={drawdata?.bonus_number}>
+          {drawdata?.bonus_number}
+      </Circle>
     </StyledContainer>
   );
 };
