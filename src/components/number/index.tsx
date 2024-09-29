@@ -1,14 +1,14 @@
 import { CircleContainer, Circle } from "./style"
 
 type LottoNumberProps = {
-  numbers: number[]
+  numbers: number[] | undefined
 }
 
 const LottoNumber = ({ numbers }: LottoNumberProps) => {
   return (
     <CircleContainer>
-      {numbers.map((number, index) => (
-        <Circle key={index} number={number}>
+      {numbers?.map((number, index) => (
+        <Circle key={index} $number={number}>
           {number}
         </Circle>
       ))}

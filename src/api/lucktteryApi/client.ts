@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const lucktteryClient = axios.create({
-  baseURL: 'https://api.luctery.com',
+  baseURL: 'https://api.luckttery.com',
   withCredentials: true,
 })
 
