@@ -5,7 +5,7 @@ import { fetchLatest } from "../../api/lucktteryApi/api";
 import Header from "../../components/Header";
 import { LottoDrawResponse } from "../../api/lucktteryApi/types";
 import { Circle } from "../../components/number/style";
-import GetLottoNumber from "../../components/getNumber";
+import Recommend from "../../components/recommend";
 
 const Home = () => {
   const [drawdata, setDrawdata] = useState<LottoDrawResponse>()
@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <StyledContainer>
       <Header/>
-      <GetLottoNumber></GetLottoNumber>
+      <Recommend/>
 
       <h3>{drawdata?.draw}회 당첨 번호</h3>
       <LottoNumber numbers={drawdata?.numbers}></LottoNumber>

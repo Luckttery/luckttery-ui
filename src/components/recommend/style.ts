@@ -79,7 +79,7 @@ export const LogoImage = styled.img`
 
 export const StyledRangeTrack = styled.div`
   height: 6px;
-  width: 100%;
+  width: 450px;
   background-color: #ccc;
   margin: 20px 0;
   position: relative;

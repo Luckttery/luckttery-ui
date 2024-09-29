@@ -4,37 +4,43 @@ import { Range } from "react-range";
 import LottoNumber from "../number";
 import { useState } from "react";
 
-const STEP = 10;
-const MIN = 0;
-const MAX = 100;
+const STEP = 10
+const MIN = 0
+const MAX = 100
 
-const GetLottoNumber = () => {
-  const [number, setNumber] = useState<number | null>(null);
-  const [medianRange, setMedianRange] = useState([0, 100]);
-  const [data, setData] = useState<number[][]>([]);
-  const [error, setError] = useState<string | null>(null);
+const Recommend = () => {
+  const [number, setNumber] = useState<number | null>(null)
+  const [medianRange, setMedianRange] = useState([0, 100])
+  const [data, setData] = useState<number[][]>([])
+  const [error, setError] = useState<string | null>(null)
 
   const getLottoData = async () => {
-    if (number == null || number === 0) return alert("세트 수가 입력되지 않았습니다.");
+    if (number == null || number === 0) return alert("세트 수가 입력되지 않았습니다.")
     try {
       if (number) {
-        const result = await fetchGetNumber(number, medianRange[0], medianRange[1]);
-        setData(result.sets);
-        setError(null);
+        const result = await fetchGetNumber(number, medianRange[0], medianRange[1])
+        setData(result.sets)
+        setError(null)
       }
     } catch (error) {
-      alert(error);
+      alert(error)
     }
-  };
+  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setNumber(value ? Number(value) : null);
-  };
+    const value = Number(event.target.value)
+
+    if (value < 0) {
+      setNumber(0)
+    } else {
+      setNumber(value)
+    }
+  }
 
   const handleRangeChange = (values: number[]) => {
-    setMedianRange(values);
-  };
+    setMedianRange(values)
+  }
+
   return (
     <StyledContainer>
       <StyledInputField
@@ -51,14 +57,14 @@ const GetLottoNumber = () => {
     onChange={handleRangeChange}
     renderTrack={({ props, children }) => {
       const [min, max] = medianRange;
-      const trackLeft = ((min - MIN) / (MAX - MIN)) * 100;
-      const trackWidth = ((max - min) / (MAX - MIN)) * 100;
+      const trackLeft = ((min - MIN) / (MAX - MIN)) * 100
+      const trackWidth = ((max - min) / (MAX - MIN)) * 100
       return (
         <StyledRangeTrack {...props}>
           <StyledRangeSelectedTrack $left={trackLeft} $width={trackWidth} />
           {children}
         </StyledRangeTrack>
-      );
+      )
     }}
     renderThumb={({ props, index }) => (
       <StyledRangeThumb {...props} key={props.key}>
@@ -87,4 +93,4 @@ const GetLottoNumber = () => {
   )
 }
 
-export default GetLottoNumber
+export default Recommend
