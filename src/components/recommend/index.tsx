@@ -1,5 +1,5 @@
 import { fetchGetNumber } from "../../api/lucktteryApi/api";
-import { StyledButton, StyledContainer, StyledDataContainer, StyledError, StyledInputField, StyledRangeSelectedTrack, StyledRangeThumb, StyledRangeTrack, StyledResultItem, StyledResultList, StyledThumbLabel } from "./style";
+import { StyledButton, StyledContainer, StyledDataContainer, StyledError, StyledInputField, StyledLoader, StyledRangeSelectedTrack, StyledRangeThumb, StyledRangeTrack, StyledResultItem, StyledResultList, StyledThumbLabel } from "./style";
 import { Range } from "react-range";
 import LottoNumber from "../number";
 import { useState } from "react";
@@ -13,9 +13,12 @@ const Recommend = () => {
   const [medianRange, setMedianRange] = useState([0, 100])
   const [data, setData] = useState<number[][]>([])
   const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const getLottoData = async () => {
     if (number == null || number === 0) return alert("세트 수가 입력되지 않았습니다.")
+    if (medianRange[0] === medianRange[1]) return alert("하위 빈도 값과 상위 빈도 값이 달라야 합니다.")
+    setLoading(true)
     try {
       if (number) {
         const result = await fetchGetNumber(number, medianRange[0], medianRange[1])
@@ -24,6 +27,8 @@ const Recommend = () => {
       }
     } catch (error) {
       alert(error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -75,9 +80,11 @@ const Recommend = () => {
 
   <StyledButton onClick={() => getLottoData()}>번호 추천 받기</StyledButton>
 
+  {loading && <StyledLoader/>}
+  
   {error && <StyledError>{error}</StyledError>}
 
-  {data.length !== 0 && (
+  {data.length !== 0 && !loading && (
     <StyledDataContainer>
       <h2>추천 번호</h2>
       <StyledResultList>

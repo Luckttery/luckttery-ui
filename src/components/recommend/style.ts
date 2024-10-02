@@ -53,7 +53,7 @@ export const StyledError = styled.div`
 export const StyledDataContainer = styled.div`
   margin-top: 20px;
   background-color: #fff;
-  padding: 20px;
+  padding: 25px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
@@ -89,7 +89,7 @@ export const StyledRangeTrack = styled.div`
 export const StyledRangeSelectedTrack = styled.div<{ $left: number; $width: number }>`
   position: absolute;
   height: 100%;
-  background-color: #69c8f2; /* 선택된 범위의 색상 */
+  background-color: #69c8f2;
   left: ${(props) => props.$left}%;
   width: ${(props) => props.$width}%;
 `;
@@ -113,4 +113,19 @@ export const StyledThumbLabel = styled.div`
   padding: 2px;
   border-radius: 3px;
   background-color: #69c8f2;
+`;
+
+export const StyledLoader = styled.div`
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 6px solid #69C8F2;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin: 20px auto;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 `;
