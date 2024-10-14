@@ -28,7 +28,7 @@ const Map = () => {
     }
   }, [])
 
-  // 지도 생성
+  // 지도 생성 및 마커 추가
   useEffect(() => {
     if (currentPosition) {
       const { naver } = window
@@ -41,6 +41,15 @@ const Map = () => {
       }
 
       const map = new naver.maps.Map('map', mapOptions)
+
+      new naver.maps.Marker({
+        position: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
+        map: map,
+        icon: {
+          content: '<div style="width: 16px; height: 16px; background: red; border-radius: 50%; border: 2px solid white;"></div>',
+          anchor: new naver.maps.Point(12, 12),
+        }
+      })
     }
   }, [currentPosition])
 
