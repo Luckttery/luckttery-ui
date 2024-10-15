@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { fetchStoreList } from '../../api/lucktteryApi/api'
 import { StoreInfo } from '../../api/lucktteryApi/types'
 import { MapContainer } from './style'
+import Lotto645Icon from '../../assets/ico_seller_645.png';
+import Lotto520Icon from '../../assets/ico_seller_720.png';
+import SpeetoIcon from '../../assets/ico_seller_speetto.png';
 
 const SEOUL_COORDINATES = { latitude: 37.5665, longitude: 126.9780 } // 기본 서울 좌표
 
@@ -88,10 +91,47 @@ const Map = () => {
         },
       })
 
+      const infoWindow = new naver.maps.InfoWindow({
+        anchorSkew: true, // 스큐(anchor) 효과 활성화
+        maxWidth: 230,
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        borderColor: 'transparent',
+      });
+
       storeData.forEach((store) => {
         const marker = new naver.maps.Marker({
           position: new naver.maps.LatLng(store.location.coordinates[1], store.location.coordinates[0]),
           map: map,
+        })
+      
+        naver.maps.Event.addListener(marker, 'mouseover', () => {
+          const icons = [];
+
+          if (store.selling_items.sells_lotto_645) {
+            icons.push(Lotto645Icon);
+          }
+          if (store.selling_items.sells_lotto_520) {
+            icons.push(Lotto520Icon);
+          }
+          if (store.selling_items.sells_speeto) {
+            icons.push(SpeetoIcon);
+          }
+
+          const iconElements = icons.map(icon => `<img src="${icon}" alt="Lottery Icon" style="width: 58px; height: 14px; margin-right: 5px;"/>`).join('');
+          
+          infoWindow.setContent(`
+            <div style="padding: 10px; font-family: sans-serif; border: 1px solid #ccc; border-radius: 10px; background-color: white;">
+              <div style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">${store.name}</div>
+              <div style="font-size: 14px; margin-bottom: 5px;">${store.address.road_name_address}</div>
+              <div style="display: flex; align-items: center;">${iconElements}</div>
+            </div>
+          `)
+
+          infoWindow.open(map, marker.getPosition());
+        })
+
+        naver.maps.Event.addListener(marker, 'mouseout', () => {
+          infoWindow.close()
         })
       })
     }
