@@ -15,6 +15,22 @@ const Map = () => {
   const [currentPosition, setCurrentPosition] = useState<{ latitude: number; longitude: number } | null>(null)
   const [storeData, setStoreData] = useState<StoreInfo[]>([])
 
+  // Naver Maps API 스크립트 동적으로 추가
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
+    script.async = true
+    document.head.appendChild(script)
+
+    script.onload = () => {
+      console.log('Naver Maps script loaded')
+    }
+
+    return () => {
+      document.head.removeChild(script) // 컴포넌트가 언마운트되면 스크립트 제거
+    }
+  }, [])
+
   // 현재 위치 가져오기
   useEffect(() => {
     if (navigator.geolocation) {
@@ -24,7 +40,7 @@ const Map = () => {
           setCurrentPosition({ latitude, longitude })
         },
         (error) => {
-          console.error("Error: ", error)
+          console.error('Error fetching location: ', error)
           setCurrentPosition(SEOUL_COORDINATES)
         }
       )
@@ -69,7 +85,7 @@ const Map = () => {
         icon: {
           content: '<div style="width: 16px; height: 16px; background: red; border-radius: 50%; border: 2px solid white;"></div>',
           anchor: new naver.maps.Point(12, 12),
-        }
+        },
       })
 
       storeData.forEach((store) => {
@@ -81,9 +97,7 @@ const Map = () => {
     }
   }, [currentPosition, storeData])
 
-  return (
-    <MapContainer id="map" />
-  )
+  return <MapContainer id="map" />
 }
 
 export default Map
