@@ -2,10 +2,14 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   padding: 20px;
-  border-radius: 10px;
+`;
+
+export const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 
 export const StyledInputField = styled.input`
@@ -51,6 +55,7 @@ export const StyledError = styled.div`
 `;
 
 export const StyledDataContainer = styled.div`
+  flex: 1;
   margin-top: 20px;
   background-color: #fff;
   padding: 25px;
@@ -79,7 +84,6 @@ export const LogoImage = styled.img`
 
 export const StyledRangeTrack = styled.div`
   height: 6px;
-  width: 450px;
   background-color: #ccc;
   margin: 20px 0;
   position: relative;
