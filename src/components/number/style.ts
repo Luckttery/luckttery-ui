@@ -6,6 +6,7 @@ type CircleProps = {
 
 export const CircleContainer = styled.div`
   display: flex;
+  justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
 `;
