@@ -73,7 +73,7 @@ const Map = () => {
     if (currentPosition && storeData.length > 0) {
       const { naver } = window;
   
-      if (!naver) return console.log('Naver maps not loaded');
+      if (!naver) return console.log('Naver maps not loaded')
   
       const mapOptions = {
         center: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
@@ -108,13 +108,13 @@ const Map = () => {
           const icons = [];
   
           if (store.selling_items.sells_lotto_645) {
-            icons.push(Lotto645Icon);
+            icons.push(Lotto645Icon)
           }
           if (store.selling_items.sells_lotto_520) {
-            icons.push(Lotto520Icon);
+            icons.push(Lotto520Icon)
           }
           if (store.selling_items.sells_speeto) {
-            icons.push(SpeetoIcon);
+            icons.push(SpeetoIcon)
           }
   
           const iconElements = icons.map(icon => `<img src="${icon}" alt="Lottery Icon" style="width: 58px; height: 14px; margin-right: 5px;"/>`).join('');
