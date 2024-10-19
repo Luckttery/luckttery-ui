@@ -12,8 +12,8 @@ export const CircleContainer = styled.div`
 `;
 
 export const Circle = styled.div<CircleProps>`
-  width: 54px;
-  height: 54px;
+  width: clamp(36px, 5vw, 54px);
+  height: clamp(36px, 5vw, 54px);
   background-color: ${(props) => {
     if (props.$number !== undefined && props.$number >= 1 && props.$number <= 9) return "#FFD83D"
     if (props.$number !== undefined && props.$number >= 10 && props.$number <= 19) return "#61DAFF"
@@ -25,7 +25,7 @@ export const Circle = styled.div<CircleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: clamp(16px, 2vw, 24px);
   font-weight: bold;
   color: #FFFFFF;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
