@@ -71,17 +71,17 @@ const Map = () => {
   // 지도 생성 및 마커 추가
   useEffect(() => {
     if (currentPosition && storeData.length > 0) {
-      const { naver } = window
-
-      if (!naver) return console.log('Naver maps not loaded')
-
+      const { naver } = window;
+  
+      if (!naver) return console.log('Naver maps not loaded');
+  
       const mapOptions = {
         center: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
         zoom: 18,
       }
-
-      const map = new naver.maps.Map('map', mapOptions)
-
+  
+      const map = new naver.maps.Map('map', mapOptions);
+  
       new naver.maps.Marker({
         position: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
         map: map,
@@ -90,23 +90,23 @@ const Map = () => {
           anchor: new naver.maps.Point(12, 12),
         },
       })
-
+  
       const infoWindow = new naver.maps.InfoWindow({
-        anchorSkew: true, // 스큐(anchor) 효과 활성화
+        anchorSkew: true,
         maxWidth: 230,
         backgroundColor: 'rgba(255, 255, 255, 0)',
         borderColor: 'transparent',
-      });
-
+      })
+  
       storeData.forEach((store) => {
         const marker = new naver.maps.Marker({
           position: new naver.maps.LatLng(store.location.coordinates[1], store.location.coordinates[0]),
           map: map,
         })
-      
-        naver.maps.Event.addListener(marker, 'mouseover', () => {
+  
+        const showInfoWindow = () => {
           const icons = [];
-
+  
           if (store.selling_items.sells_lotto_645) {
             icons.push(Lotto645Icon);
           }
@@ -116,9 +116,9 @@ const Map = () => {
           if (store.selling_items.sells_speeto) {
             icons.push(SpeetoIcon);
           }
-
+  
           const iconElements = icons.map(icon => `<img src="${icon}" alt="Lottery Icon" style="width: 58px; height: 14px; margin-right: 5px;"/>`).join('');
-          
+  
           infoWindow.setContent(`
             <div style="padding: 10px; font-family: sans-serif; border: 1px solid #ccc; border-radius: 10px; background-color: white;">
               <div style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">${store.name}</div>
@@ -126,16 +126,18 @@ const Map = () => {
               <div style="display: flex; align-items: center;">${iconElements}</div>
             </div>
           `)
-
+  
           infoWindow.open(map, marker.getPosition());
-        })
-
-        naver.maps.Event.addListener(marker, 'mouseout', () => {
-          infoWindow.close()
-        })
+        }
+  
+        naver.maps.Event.addListener(marker, 'mouseover', showInfoWindow)
+        naver.maps.Event.addListener(marker, 'mouseout', () => infoWindow.close())
+  
+        // 모바일 환경에서는 click 이벤트 사용
+        naver.maps.Event.addListener(marker, 'click', showInfoWindow)
       })
     }
-  }, [currentPosition, storeData])
+  }, [currentPosition, storeData])  
 
   return <MapContainer id="map" />
 }
