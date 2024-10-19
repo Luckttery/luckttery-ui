@@ -71,7 +71,7 @@ const Map = () => {
   // 지도 생성 및 마커 추가
   useEffect(() => {
     if (currentPosition && storeData.length > 0) {
-      const { naver } = window;
+      const { naver } = window
   
       if (!naver) return console.log('Naver maps not loaded')
   
