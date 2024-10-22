@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { fetchStoreList } from '../../api/lucktteryApi/api'
 import { StoreInfo } from '../../api/lucktteryApi/types'
-import { MapContainer } from './style'
+import { MapContainer, Title } from './style'
 import Lotto645Icon from '../../assets/ico_seller_645.png';
 import Lotto520Icon from '../../assets/ico_seller_720.png';
 import SpeetoIcon from '../../assets/ico_seller_speetto.png';
@@ -12,6 +12,12 @@ declare global {
   interface Window {
     naver: any
   }
+}
+
+function decodeHTMLEntities(text: string) {
+  const parser = new DOMParser();
+  const decodedString = parser.parseFromString(text, "text/html").documentElement.textContent;
+  return decodedString;
 }
 
 const Map = () => {
@@ -107,13 +113,13 @@ const Map = () => {
         const showInfoWindow = () => {
           const icons = [];
   
-          if (store.selling_items.sells_lotto_645) {
+          if (store.selling_items.sells_annuity) {
             icons.push(Lotto645Icon)
           }
-          if (store.selling_items.sells_lotto_520) {
+          if (store.selling_items.sells_lotto) {
             icons.push(Lotto520Icon)
           }
-          if (store.selling_items.sells_speeto) {
+          if (store.selling_items.sells_speeto_500 || store.selling_items.sells_speeto_1000 || store.selling_items.sells_speeto_2000) {
             icons.push(SpeetoIcon)
           }
   
@@ -122,7 +128,7 @@ const Map = () => {
           infoWindow.setContent(`
             <div style="padding: 10px; font-family: sans-serif; border: 1px solid #ccc; border-radius: 10px; background-color: white;">
               <div style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">${store.name}</div>
-              <div style="font-size: 14px; margin-bottom: 5px;">${store.address.road_name_address}</div>
+              <div style="font-size: 14px; margin-bottom: 5px;">${decodeHTMLEntities(store.address.full_address)}</div>
               <div style="display: flex; align-items: center;">${iconElements}</div>
             </div>
           `)
@@ -139,7 +145,12 @@ const Map = () => {
     }
   }, [currentPosition, storeData])  
 
-  return <MapContainer id="map" />
+  return (
+    <>
+    <Title>판매점 찾기</Title>
+    <MapContainer id="map" />
+    </>
+  )
 }
 
 export default Map

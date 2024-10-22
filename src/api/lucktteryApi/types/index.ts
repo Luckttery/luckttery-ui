@@ -33,9 +33,9 @@ export type StoreInfo = {
 export type Storeaddress = {
   additional_info: string
   district: string
+  full_address: string
   land_lot_number: string
   region: string
-  road_name_address: string
   town: string
 }
 
@@ -45,7 +45,9 @@ export type StoreLocation = {
 }
 
 export type StoreSelling_items = {
-  sells_lotto_520: boolean
-  sells_lotto_645: boolean
-  sells_speeto: boolean
+  sells_lotto: boolean
+  sells_annuity: boolean
+  sells_speeto_500: boolean
+  sells_speeto_1000: boolean
+  sells_speeto_2000: boolean
 }
