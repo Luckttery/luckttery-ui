@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
   flex: 1;
 `;
 
@@ -28,13 +28,18 @@ export const StyledError = styled.div`
 export const StyledDataContainer = styled.div`
   flex: 1;
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
 export const StyledResultList = styled.ul`
-  list-style-type: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const StyledResultItem = styled.li`
