@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { fetchStoreList } from '../../api/lucktteryApi/api'
 import { StoreInfo } from '../../api/lucktteryApi/types'
-import { MapContainer, Title } from './style'
+import { CurrentLocationButton, MapContainer, Title } from './style'
 import Lotto645Icon from '../../assets/ico_seller_645.png';
 import Lotto520Icon from '../../assets/ico_seller_720.png';
 import SpeetoIcon from '../../assets/ico_seller_speetto.png';
+import {ReactComponent as LocationIcon} from '../../assets/my-location.svg';
 
 const SEOUL_COORDINATES = { latitude: 37.5665, longitude: 126.9780 } // 기본 서울 좌표
 
@@ -42,20 +43,7 @@ const Map = () => {
 
   // 현재 위치 가져오기
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords
-          setCurrentPosition({ latitude, longitude })
-        },
-        (error) => {
-          console.error('Error fetching location: ', error)
-          setCurrentPosition(SEOUL_COORDINATES)
-        }
-      )
-    } else {
-      setCurrentPosition(SEOUL_COORDINATES)
-    }
+    getCurrentLocation()
   }, [])
 
   // 상점 정보 가져오기
@@ -143,12 +131,46 @@ const Map = () => {
         naver.maps.Event.addListener(marker, 'click', showInfoWindow)
       })
     }
-  }, [currentPosition, storeData])  
+  }, [currentPosition, storeData])
+
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords
+          setCurrentPosition({ latitude, longitude })
+        },
+        (error) => {
+          console.error('Error fetching location: ', error)
+          setCurrentPosition(SEOUL_COORDINATES)
+        }
+      )
+    } else {
+      setCurrentPosition(SEOUL_COORDINATES)
+    }
+
+    if (currentPosition) {
+      const { naver } = window
+  
+      if (!naver) return console.log('Naver maps not loaded')
+
+      const mapOptions = {
+        center: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
+        zoom: 18,
+      }
+
+      const map = new naver.maps.Map('map', mapOptions);
+    }
+  }
 
   return (
     <>
     <Title>판매점 찾기</Title>
-    <MapContainer id="map" />
+    <MapContainer id="map">
+        <CurrentLocationButton id="currentLocationButton" onClick={getCurrentLocation}>
+          <LocationIcon width="24px" height="24px"/>
+        </CurrentLocationButton>
+      </MapContainer>
     </>
   )
 }
