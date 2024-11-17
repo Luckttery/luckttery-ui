@@ -63,7 +63,7 @@ const Map = () => {
     if (currentPosition) {
       const fetchStores = async () => {
         try {
-          const response = await fetchStoreList(currentPosition.latitude, currentPosition.longitude, 10) // TODO: 반경은 임시
+          const response = await fetchStoreList(currentPosition.latitude, currentPosition.longitude, 2)
           setStoreData(response)
         } catch (error) {
           console.error('Error fetching locations:', error)
