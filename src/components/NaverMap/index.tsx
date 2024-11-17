@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { fetchStoreList } from '../../api/lucktteryApi/api'
 import { StoreInfo } from '../../api/lucktteryApi/types'
 import { CurrentLocationButton, MapContainer, Title } from './style'
@@ -42,10 +42,33 @@ const Map = () => {
     }
   }, [])
 
+  const getCurrentLocation = useCallback(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords
+          setCurrentPosition({ latitude, longitude })
+        },
+        (error) => {
+          console.error('Error fetching location: ', error)
+          setCurrentPosition(SEOUL_COORDINATES)
+        }
+      )
+    } else {
+      setCurrentPosition(SEOUL_COORDINATES)
+    }
+
+    if (currentPosition) {
+      if (!map) return console.log('Naver maps not loaded')
+
+      map.setOptions('center', new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude))
+    }
+  }, [currentPosition, map])
+
   // 현재 위치 가져오기
   useEffect(() => {
     getCurrentLocation()
-  }, [])
+  }, [getCurrentLocation])
 
   // 상점 정보 가져오기
   useEffect(() => {
@@ -135,29 +158,6 @@ const Map = () => {
       })
     }
   }, [currentPosition, storeData])
-
-  const getCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords
-          setCurrentPosition({ latitude, longitude })
-        },
-        (error) => {
-          console.error('Error fetching location: ', error)
-          setCurrentPosition(SEOUL_COORDINATES)
-        }
-      )
-    } else {
-      setCurrentPosition(SEOUL_COORDINATES)
-    }
-
-    if (currentPosition) {
-      if (!map) return console.log('Naver maps not loaded')
-
-      map.setOptions('center', new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude))
-    }
-  }
 
   return (
     <>
