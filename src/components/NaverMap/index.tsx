@@ -63,7 +63,7 @@ const Map = () => {
 
       map.setOptions('center', new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude))
     }
-  }, [currentPosition, map])
+  }, [])
 
   // 현재 위치 가져오기
   useEffect(() => {
