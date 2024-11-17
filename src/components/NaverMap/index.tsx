@@ -42,30 +42,57 @@ const Map = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const { naver } = window;
+  
+    if (!naver) {
+      console.log('Naver maps not loaded');
+      return;
+    }
+  
+    if (!map) {
+      const mapOptions = {
+        center: new naver.maps.LatLng(SEOUL_COORDINATES.latitude, SEOUL_COORDINATES.longitude),
+        zoom: 18,
+      };
+  
+      const newMap = new naver.maps.Map('map', mapOptions);
+      setMap(newMap);
+    }
+  }, [map]);
+
   const getCurrentLocation = useCallback(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setCurrentPosition({ latitude, longitude });
+  
+          if (map) {
+            map.setCenter(new naver.maps.LatLng(latitude, longitude));
+          }
         },
         (error) => {
           console.error('Error fetching location: ', error);
-          setCurrentPosition(SEOUL_COORDINATES); // 에러 발생 시 기본 좌표를 설정
+          setCurrentPosition(SEOUL_COORDINATES);
+  
+          if (map) {
+            map.setCenter(new naver.maps.LatLng(SEOUL_COORDINATES.latitude, SEOUL_COORDINATES.longitude));
+          }
         }
       );
     } else {
-      setCurrentPosition(SEOUL_COORDINATES) // Geolocation 지원하지 않을 경우 기본 좌표를 설정
+      setCurrentPosition(SEOUL_COORDINATES);
+  
+      if (map) {
+        map.setCenter(new naver.maps.LatLng(SEOUL_COORDINATES.latitude, SEOUL_COORDINATES.longitude));
+      }
     }
-
-    if (map && currentPosition) {
-      map.setOptions('center', new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude))
-    }
-  }, [currentPosition, map])
+  }, [map]);
   
   useEffect(() => {
     getCurrentLocation(); // 컴포넌트가 처음 렌더링될 때 현재 위치를 가져옵니다.
-  }, [])
+  }, [getCurrentLocation])
 
   // 상점 정보 가져오기
   useEffect(() => {
