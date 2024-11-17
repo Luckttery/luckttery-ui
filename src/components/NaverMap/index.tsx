@@ -28,136 +28,149 @@ const Map = () => {
 
   // Naver Maps API 스크립트 동적으로 추가
   useEffect(() => {
-    const script = document.createElement('script')
-    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
-    script.async = true
-    document.head.appendChild(script)
-
+    const script = document.createElement('script');
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`;
+    script.async = true;
+    document.head.appendChild(script);
+  
     script.onload = () => {
-      console.log('Naver Maps script loaded')
-    }
-
+      console.log('Naver Maps script loaded');
+    };
+  
     return () => {
-      document.head.removeChild(script) // 컴포넌트가 언마운트되면 스크립트 제거
-    }
-  }, [])
+      document.head.removeChild(script); // 컴포넌트가 언마운트되면 스크립트를 제거합니다.
+    };
+  }, []);
 
   const getCurrentLocation = useCallback(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const { latitude, longitude } = position.coords
-          setCurrentPosition({ latitude, longitude })
+          const { latitude, longitude } = position.coords;
+          setCurrentPosition({ latitude, longitude });
         },
         (error) => {
-          console.error('Error fetching location: ', error)
-          setCurrentPosition(SEOUL_COORDINATES)
+          console.error('Error fetching location: ', error);
+          setCurrentPosition(SEOUL_COORDINATES); // 에러 발생 시 기본 좌표를 설정
         }
-      )
+      );
     } else {
-      setCurrentPosition(SEOUL_COORDINATES)
+      setCurrentPosition(SEOUL_COORDINATES) // Geolocation 지원하지 않을 경우 기본 좌표를 설정
     }
 
-    if (currentPosition) {
-      if (!map) return console.log('Naver maps not loaded')
-
+    if (map && currentPosition) {
       map.setOptions('center', new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude))
     }
-  }, [])
-
-  // 현재 위치 가져오기
+  }, [currentPosition, map])
+  
   useEffect(() => {
-    getCurrentLocation()
-  }, [getCurrentLocation])
+    getCurrentLocation(); // 컴포넌트가 처음 렌더링될 때 현재 위치를 가져옵니다.
+  }, [])
 
   // 상점 정보 가져오기
   useEffect(() => {
     if (currentPosition) {
       const fetchStores = async () => {
         try {
-          const response = await fetchStoreList(currentPosition.latitude, currentPosition.longitude, 2)
-          setStoreData(response)
+          const response = await fetchStoreList(
+            currentPosition.latitude,
+            currentPosition.longitude,
+            2 // 검색 반경 설정 (예: 2km)
+          );
+          setStoreData(response);
         } catch (error) {
-          console.error('Error fetching locations:', error)
+          console.error('Error fetching locations:', error);
         }
-      }
-
-      fetchStores()
+      };
+  
+      fetchStores();
     }
   }, [currentPosition])
 
   // 지도 생성 및 마커 추가
   useEffect(() => {
-    if (currentPosition && storeData.length > 0) {
-      const { naver } = window
+    if (!currentPosition || storeData.length === 0) return;
   
-      if (!naver) return console.log('Naver maps not loaded')
+    const { naver } = window;
   
+    if (!naver) {
+      console.log('Naver maps not loaded');
+      return;
+    }
+  
+    if (!map) {
+      // 지도 초기화는 최초 1회만 실행
       const mapOptions = {
         center: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
         zoom: 18,
-      }
+      };
   
-      const map = new naver.maps.Map('map', mapOptions);
-
-      setMap(map)
+      const newMap = new naver.maps.Map('map', mapOptions);
+      setMap(newMap);
   
+      // 현재 위치 마커 추가
       new naver.maps.Marker({
         position: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
-        map: map,
+        map: newMap,
         icon: {
-          content: '<div style="width: 16px; height: 16px; background: red; border-radius: 50%; border: 2px solid white;"></div>',
+          content:
+            '<div style="width: 16px; height: 16px; background: red; border-radius: 50%; border: 2px solid white;"></div>',
           anchor: new naver.maps.Point(12, 12),
         },
-      })
+      });
+    }
   
-      const infoWindow = new naver.maps.InfoWindow({
-        anchorSkew: true,
-        maxWidth: 230,
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        borderColor: 'transparent',
-      })
+    // 상점 마커 추가
+    const infoWindow = new naver.maps.InfoWindow({
+      anchorSkew: true,
+      maxWidth: 230,
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      borderColor: 'transparent',
+    });
   
-      storeData.forEach((store) => {
-        const marker = new naver.maps.Marker({
-          position: new naver.maps.LatLng(store.location.coordinates[1], store.location.coordinates[0]),
-          map: map,
-        })
+    storeData.forEach((store) => {
+      const marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(store.location.coordinates[1], store.location.coordinates[0]),
+        map: map,
+      });
   
-        const showInfoWindow = () => {
-          const icons = [];
-  
-          if (store.selling_items.sells_annuity) {
-            icons.push(Lotto645Icon)
-          }
-          if (store.selling_items.sells_lotto) {
-            icons.push(Lotto520Icon)
-          }
-          if (store.selling_items.sells_speeto_500 || store.selling_items.sells_speeto_1000 || store.selling_items.sells_speeto_2000) {
-            icons.push(SpeetoIcon)
-          }
-  
-          const iconElements = icons.map(icon => `<img src="${icon}" alt="Lottery Icon" style="width: 58px; height: 14px; margin-right: 5px;"/>`).join('');
-  
-          infoWindow.setContent(`
-            <div style="padding: 10px; font-family: sans-serif; border: 1px solid #ccc; border-radius: 10px; background-color: white;">
-              <div style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">${store.name}</div>
-              <div style="font-size: 14px; margin-bottom: 5px;">${decodeHTMLEntities(store.address.full_address)}</div>
-              <div style="display: flex; align-items: center;">${iconElements}</div>
-            </div>
-          `)
-  
-          infoWindow.open(map, marker.getPosition());
+      const showInfoWindow = () => {
+        const icons = [];
+        if (store.selling_items.sells_annuity) icons.push(Lotto645Icon);
+        if (store.selling_items.sells_lotto) icons.push(Lotto520Icon);
+        if (
+          store.selling_items.sells_speeto_500 ||
+          store.selling_items.sells_speeto_1000 ||
+          store.selling_items.sells_speeto_2000
+        ) {
+          icons.push(SpeetoIcon);
         }
   
-        naver.maps.Event.addListener(marker, 'mouseover', showInfoWindow)
-        naver.maps.Event.addListener(marker, 'mouseout', () => infoWindow.close())
+        const iconElements = icons
+          .map(
+            (icon) =>
+              `<img src="${icon}" alt="Lottery Icon" style="width: 58px; height: 14px; margin-right: 5px;"/>`
+          )
+          .join('');
   
-        // 모바일 환경에서는 click 이벤트 사용
-        naver.maps.Event.addListener(marker, 'click', showInfoWindow)
-      })
-    }
-  }, [currentPosition, storeData])
+        infoWindow.setContent(`
+          <div style="padding: 10px; font-family: sans-serif; border: 1px solid #ccc; border-radius: 10px; background-color: white;">
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 5px;">${store.name}</div>
+            <div style="font-size: 14px; margin-bottom: 5px;">${decodeHTMLEntities(
+              store.address.full_address
+            )}</div>
+            <div style="display: flex; align-items: center;">${iconElements}</div>
+          </div>
+        `);
+  
+        infoWindow.open(map, marker.getPosition());
+      };
+  
+      naver.maps.Event.addListener(marker, 'mouseover', showInfoWindow);
+      naver.maps.Event.addListener(marker, 'mouseout', () => infoWindow.close());
+      naver.maps.Event.addListener(marker, 'click', showInfoWindow);
+    });
+  }, [currentPosition, storeData, map])
 
   return (
     <>
