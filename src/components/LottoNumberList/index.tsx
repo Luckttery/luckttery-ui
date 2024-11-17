@@ -9,7 +9,8 @@ const LottoNumberList: React.FC<LottoNumberListProps> = ({ lottoData }) => {
   return (
     <StyledContainer>
       {lottoData.length !== 0 && (
-        <StyledDataContainer>
+        // <StyledDataContainer>
+        <div>
           <h2>추천 번호</h2>
           <StyledResultList>
             {lottoData.map((num: number[], index: number) => (
@@ -18,7 +19,8 @@ const LottoNumberList: React.FC<LottoNumberListProps> = ({ lottoData }) => {
               </StyledResultItem>
             ))}
           </StyledResultList>
-        </StyledDataContainer>
+          </div>
+        // </StyledDataContainer>
       )}
     </StyledContainer>
   )
