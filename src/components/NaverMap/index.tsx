@@ -24,6 +24,7 @@ function decodeHTMLEntities(text: string) {
 const Map = () => {
   const [currentPosition, setCurrentPosition] = useState<{ latitude: number; longitude: number } | null>(null)
   const [storeData, setStoreData] = useState<StoreInfo[]>([])
+  const [map, setMap] = useState<naver.maps.Map>()
 
   // Naver Maps API 스크립트 동적으로 추가
   useEffect(() => {
@@ -75,6 +76,8 @@ const Map = () => {
       }
   
       const map = new naver.maps.Map('map', mapOptions);
+
+      setMap(map)
   
       new naver.maps.Marker({
         position: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
@@ -150,16 +153,9 @@ const Map = () => {
     }
 
     if (currentPosition) {
-      const { naver } = window
-  
-      if (!naver) return console.log('Naver maps not loaded')
+      if (!map) return console.log('Naver maps not loaded')
 
-      const mapOptions = {
-        center: new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
-        zoom: 18,
-      }
-
-      const map = new naver.maps.Map('map', mapOptions);
+      map.setOptions('center', new naver.maps.LatLng(currentPosition.latitude, currentPosition.longitude))
     }
   }
 
