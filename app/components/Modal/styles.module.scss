@@ -1,0 +1,108 @@
+.modalWrapper {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--modal-overlay);
+}
+
+.modalContent {
+  position: relative;
+  width: 100%;
+  max-width: 32rem;
+  background-color: var(--modal-bg);
+  color: var(--modal-text);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: var(--modal-shadow);
+  border: 1px solid var(--border-color);
+  z-index: 51;
+  
+  @media (max-width: 640px) {
+    max-width: 90%;
+    margin: 1rem;
+  }
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  color: var(--modal-text);
+}
+
+.closeButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  color: var(--close-button-color);
+  transition: color 0.2s ease;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    color: var(--close-button-hover);
+    background-color: var(--modal-overlay);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--close-button-color);
+  }
+}
+
+.closeIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.modalBody {
+  margin-top: 0.5rem;
+  color: var(--modal-text);
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalWrapper {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modalContent {
+  animation: slideIn 0.2s ease-out;
+}

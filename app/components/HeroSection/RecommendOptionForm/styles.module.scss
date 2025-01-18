@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 16px;
+}
+
+.rangeTrack {
+  height: 6px;
+  background-color: #ccc;
+  margin: 20px 0;
+  position: relative;
+}
+
+.rangeSelectedTrack {
+  position: absolute;
+  height: 100%;
+  background-color: var(--primary-color);
+}
+
+.rangeThumb {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.rangeThumbLabel {
+  position: absolute;
+  top: -28px;
+  color: #fff;
+  font-weight: bold;
+  padding: 2px;
+  border-radius: 3px;
+  background-color: var(--primary-color);
+}

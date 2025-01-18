@@ -1,0 +1,32 @@
+.paper {
+  background-color: var(--paper-bg-color);
+  color: var(--paper-text-color);
+  box-shadow: 0 1px 3px var(--paper-shadow-color);
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  border-radius: 4px;
+
+  &.rounded {
+    border-radius: 12px;
+  }
+}
+
+.elevation-0 {
+  box-shadow: none;
+}
+
+.elevation-1 {
+  box-shadow: 0 1px 3px var(--paper-shadow-color);
+}
+
+.elevation-2 {
+  box-shadow: 0 3px 6px var(--paper-shadow-color);
+}
+
+.elevation-3 {
+  box-shadow: 0 6px 12px var(--paper-shadow-color);
+}
+
+.elevation-4 {
+  box-shadow: 0 8px 16px var(--paper-shadow-color);
+}

@@ -1,0 +1,39 @@
+.lottoSet {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: .3rem;
+  }
+}
+
+.mainNumbers {
+  display: flex;
+  gap: .8rem;
+}
+
+.bonusWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: .3rem;
+  }
+}
+
+.plusIcon {
+  font-size: 24px;
+  font-weight: bold;
+  color: #666;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+}

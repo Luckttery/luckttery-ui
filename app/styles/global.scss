@@ -1,0 +1,42 @@
+:root {
+  --primary-color: #338EF7;
+  --background-color: white;
+  --text-color: black;
+  --modal-bg: #ffffff;
+  --modal-text: #1a1a1a;
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  --modal-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                  0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --close-button-color: #9ca3af;
+  --close-button-hover: #4b5563;
+  --border-color: #e5e7eb; 
+  --paper-bg-color: #ffffff;
+  --paper-text-color: #000000;
+  --paper-shadow-color: rgba(0, 0, 0, 0.2);
+
+  @media (prefers-color-scheme: dark) {
+    --background-color: #0a0a0a;
+    --text-color: white;
+    --modal-bg: #1f2937;
+    --modal-text: #f3f4f6;
+    --modal-overlay: rgba(0, 0, 0, 0.7);
+    --modal-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
+                    0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    --close-button-color: #9ca3af;
+    --close-button-hover: #f3f4f6;
+    --border-color: #374151;
+    --paper-bg-color: #1a1a1a;
+    --paper-text-color: #e0e0e0;
+    --paper-shadow-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+html,
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
