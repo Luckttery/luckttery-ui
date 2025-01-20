@@ -4,7 +4,7 @@ import styles from "./styles.module.scss"
 import { renderToString } from "react-dom/server";
 import CurrentMarker from "./CurrentMarker";
 import myLocation from "~/assets/my-location.svg";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { fetchStoreList } from "~/api/lucktteryApi/api";
 import StoreInfoWindow from "./StoreInfoWindow";
 

@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { fetchLatest } from "~/api/lucktteryApi/api";
 import Intro from "~/components/HeroSection/Intro";
 import RecommendOptionForm from "~/components/HeroSection/RecommendOptionForm";
@@ -22,19 +23,23 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader = async () => {
-  const latestDraw = await fetchLatest()
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ["latestDraw"],
+    queryFn: fetchLatest,
+  })
   
   return Response.json({
     ENV: {
       NAVER_MAP_CLIENT_ID: process.env.NAVER_MAP_CLIENT_ID,
     },
-    latestDraw: latestDraw
+    dehydratedState: dehydrate(queryClient)
   });
 };
 
 export default function Index() {
-  const data = useLoaderData<typeof loader>();
-  const { latestDraw } = data;
+  const { dehydratedState } = useLoaderData<typeof loader>();
 
   return (
     <div className={styles.container}>
@@ -43,7 +48,9 @@ export default function Index() {
         <RecommendOptionForm />
       </Paper>
       <Paper elevation={4} className={styles.marginBottom}>
-        <LatestDrawSection draw={latestDraw} />
+        <HydrationBoundary state={dehydratedState}>
+          <LatestDrawSection />
+        </HydrationBoundary>
       </Paper>
       <NearbyStoresMap />
     </div>

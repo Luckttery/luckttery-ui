@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { fetchGetNumber } from "~/api/lucktteryApi/api";
 import Button from "~/components/Button";
 import LottoSet from "~/components/LottoSet";
