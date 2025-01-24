@@ -9,24 +9,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
-      - name: Build
-        run: yarn run build
+      - name: Build Remix app
+        run: npm run build
 
       - name: Publish
         uses: netlify/actions/cli@master
         with:
-          args: deploy --dir=build --functions=functions --prod
+          args: deploy --prod --message "Prod deploy v${{ github.ref }}"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_LUCKTTERY_SITE_ID }}
-          NETLIFY_DEPLOY_MESSAGE: "Prod deploy v${{ github.ref }}"
