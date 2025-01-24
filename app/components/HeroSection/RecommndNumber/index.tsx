@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchGetNumber } from "~/api/lucktteryApi/api";
 import Button from "~/components/Button";
@@ -16,14 +16,18 @@ export const RecommendNumber: React.FC<RecommendNumberProps> = ({
   lowerPercent,
   upperPercent,
 }) => {
-  // useQuery로 첫 렌더링 시 API 호출
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["recommendNumber"],
     queryFn: () => fetchGetNumber(setCount, lowerPercent, upperPercent),
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
+    enabled: false,
   });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <div className={styles.container}>
