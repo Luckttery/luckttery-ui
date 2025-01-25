@@ -51,3 +51,8 @@ export type StoreSelling_items = {
   sells_speeto_1000: boolean
   sells_speeto_2000: boolean
 }
+
+export type CursorPage<T> = {
+  contents: T[]
+  next_cursor?: number
+}
