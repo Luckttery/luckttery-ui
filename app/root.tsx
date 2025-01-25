@@ -9,6 +9,8 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import globalStyles from "~/styles/global.scss?url";
+import "react-loading-skeleton/dist/skeleton.css";
+import { SkeletonTheme } from "react-loading-skeleton";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -58,7 +60,12 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <SkeletonTheme
+        baseColor="var(--skeleton-base)"
+        highlightColor="var(--skeleton-highlight)"
+      >
+        <Outlet />
+      </SkeletonTheme>
     </QueryClientProvider>
   );
 }
