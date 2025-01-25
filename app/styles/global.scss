@@ -13,6 +13,8 @@
   --paper-bg-color: #ffffff;
   --paper-text-color: #000000;
   --paper-shadow-color: rgba(0, 0, 0, 0.2);
+  --skeleton-base: #e0e0e0;
+  --skeleton-highlight: #f0f0f0;
 
   @media (prefers-color-scheme: dark) {
     --background-color: #0a0a0a;
@@ -28,6 +30,8 @@
     --paper-bg-color: #1a1a1a;
     --paper-text-color: #e0e0e0;
     --paper-shadow-color: rgba(0, 0, 0, 0.6);
+    --skeleton-base: #303030;
+    --skeleton-highlight: #505050;
   }
 }
 
