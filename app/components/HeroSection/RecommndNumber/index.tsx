@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 import { fetchGetNumber } from "~/api/lucktteryApi/api";
 import Button from "~/components/Button";
 import LottoSet from "~/components/LottoSet";
+import LottoSetSkeleton from "~/components/LottoSet/Skeleton";
 import styles from "./styles.module.scss";
 
 type RecommendNumberProps = {
   setCount: number;
   lowerPercent: number;
   upperPercent: number;
-};
+}
 
 export const RecommendNumber: React.FC<RecommendNumberProps> = ({
   setCount,
@@ -31,14 +32,18 @@ export const RecommendNumber: React.FC<RecommendNumberProps> = ({
 
   return (
     <div className={styles.container}>
-      {isLoading && <p>로딩 중...</p>}
-      {data?.sets.map((set, index) => (
-        <LottoSet numbers={set} key={index} />
-      ))}
-
+      {isLoading ? (
+        Array.from({ length: setCount }).map((_, index) => (
+          <LottoSetSkeleton numberCount={6} hasBonusNumber={false} key={index} />
+        ))
+      ) : (
+        data?.sets.map((set, index) => (
+          <LottoSet numbers={set} key={index} />
+        ))
+      )}
       <Button onClick={() => refetch()}>새로고침</Button>
     </div>
   );
-};
+}
 
 export default RecommendNumber;
