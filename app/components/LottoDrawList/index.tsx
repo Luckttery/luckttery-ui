@@ -30,8 +30,12 @@ export const LottoDrawList: FC<LottoDrawListProps> = ({ limit }) => {
     getNextPageParam: (lastGroup) => lastGroup.next_cursor ?? undefined,
     initialPageParam: undefined,
   });
+
+  const totalCount = data?.pages.reduce((acc, page) => acc + (page.total_count), 0) ?? 0;
+  const allContents = data?.pages.flatMap((page) => page.contents) ?? [];
+
   const rowVirtualizer = useWindowVirtualizer({
-    count: 1156, //FIXME 백엔드 총 개수 응답 추가 후 수정
+    count: totalCount,
     estimateSize: () => (isMobile ? 250 : 180),
     measureElement: (el) => el.getBoundingClientRect().height,
     initialRect: { width: 0, height: 800 },
@@ -49,8 +53,6 @@ export const LottoDrawList: FC<LottoDrawListProps> = ({ limit }) => {
     if (!virtualItems.length) return;
 
     const lastItem = virtualItems[virtualItems.length - 1];
-
-    const allContents = data?.pages.flatMap((page) => page.contents) ?? [];
 
     if (
       lastItem.index >= allContents.length - 1 &&
@@ -74,7 +76,7 @@ export const LottoDrawList: FC<LottoDrawListProps> = ({ limit }) => {
       }}
     >
       {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-        const content = data?.pages.flatMap((page) => page.contents).at(virtualRow.index)
+        const content = allContents[virtualRow.index]
 
         return (
           <div

@@ -55,4 +55,5 @@ export type StoreSelling_items = {
 export type CursorPage<T> = {
   contents: T[]
   next_cursor?: number
+  total_count: number
 }
