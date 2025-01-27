@@ -31,14 +31,15 @@ export const LottoDrawList: FC<LottoDrawListProps> = ({ limit }) => {
     initialPageParam: undefined,
   });
 
-  const totalCount = data?.pages.reduce((acc, page) => acc + (page.total_count), 0) ?? 0;
+  const totalCount = data?.pages?.at(0)?.total_count ?? 0;
   const allContents = data?.pages.flatMap((page) => page.contents) ?? [];
+  const estimateSize = isMobile ? 250 : 180;
 
   const rowVirtualizer = useWindowVirtualizer({
     count: totalCount,
-    estimateSize: () => (isMobile ? 250 : 180),
+    estimateSize: () => estimateSize,
     measureElement: (el) => el.getBoundingClientRect().height,
-    initialRect: { width: 0, height: 800 },
+    initialRect: { width: 0, height: estimateSize * limit },
     gap: 16,
     overscan: 10,
   });
