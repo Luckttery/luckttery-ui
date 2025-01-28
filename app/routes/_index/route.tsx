@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { fetchLatest } from "~/api/lucktteryApi/api";
 import Intro from "~/components/HeroSection/Intro";
 import RecommendOptionForm from "~/components/HeroSection/RecommendOptionForm";
@@ -48,9 +48,7 @@ export default function Index() {
         <RecommendOptionForm />
       </Paper>
       <Paper elevation={4} className={styles.marginBottom}>
-        <HydrationBoundary state={dehydratedState}>
-          <LatestDrawSection />
-        </HydrationBoundary>
+        <LatestDrawSection />
       </Paper>
       <NearbyStoresMap />
     </div>

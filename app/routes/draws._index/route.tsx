@@ -1,5 +1,5 @@
-import { MetaFunction, useLoaderData } from "@remix-run/react";
-import { dehydrate, HydrationBoundary, InfiniteData, QueryClient, QueryKey } from "@tanstack/react-query";
+import { MetaFunction } from "@remix-run/react";
+import { dehydrate, InfiniteData, QueryClient, QueryKey } from "@tanstack/react-query";
 import { fetchDraws } from "~/api/lucktteryApi/api";
 import { CursorPage, LottoDrawResponse } from "~/api/lucktteryApi/types";
 import LottoDrawList from "~/components/LottoDrawList";
@@ -41,14 +41,10 @@ export const loader = async () => {
 };
 
 export default function Index() {
-  const { dehydratedState } = useLoaderData<typeof loader>();
-
   return (
     <div className={styles.container}>
       <h1>로또 당첨번호 모아보기</h1>
-      <HydrationBoundary state={dehydratedState}>
-        <LottoDrawList limit={LIMIT} />
-      </HydrationBoundary>
+      <LottoDrawList limit={LIMIT} />
     </div>
   );
 }
