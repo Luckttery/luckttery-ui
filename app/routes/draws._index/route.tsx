@@ -15,10 +15,10 @@ export const meta: MetaFunction = () => {
     { property: "og:title", content: "Luckttery | 로또 당첨번호 모아보기"},
     { property: "og:description", content: "로또 회차별 당첨번호를 한 곳에서 조회해보세요."},
     { property: "og:type", content: "website"},
-    { property: "og:url", content: "https://luckttery.com" },
+    { property: "og:url", content: "https://luckttery.com/draws" },
     { property: "og:image", content: "https://luckttery.com/android-chrome-512x512.png" }
   ];
-};
+}
 
 export const loader = async () => {
   const queryClient = new QueryClient()
@@ -38,7 +38,7 @@ export const loader = async () => {
   return Response.json({
     dehydratedState: dehydrate(queryClient)
   });
-};
+}
 
 export default function Index() {
   return (
