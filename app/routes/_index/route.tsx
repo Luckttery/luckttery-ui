@@ -44,10 +44,10 @@ export default function Index() {
   return (
     <div className={styles.container}>
       <Intro title="당신의 행운 로또 도우미" subtitle="행운의 번호 생성, 당첨 결과 확인, 판매점 찾기까지 모두 한 곳에서!" />
-      <Paper elevation={4} className={styles.marginBottom}>
+      <Paper elevation={4} className={styles.margin}>
         <RecommendOptionForm />
       </Paper>
-      <Paper elevation={4} className={styles.marginBottom}>
+      <Paper elevation={4} className={styles.margin}>
         <LatestDrawSection />
       </Paper>
       <NearbyStoresMap />

@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   gap: .8rem;
+  margin: 24px auto;
 
   @media (max-width: 768px) {
     flex-direction: column;
