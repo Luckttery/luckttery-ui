@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { InfiniteData, QueryKey, useInfiniteQuery } from "@tanstack/react-query";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { FC, useEffect } from "react";
@@ -6,6 +7,7 @@ import { fetchDraws } from "~/api/lucktteryApi/api";
 import { CursorPage, LottoDrawResponse } from "~/api/lucktteryApi/types";
 import LottoDraw from "../LottoDraw";
 import LottoDrawSkeleton from "../LottoDraw/Skeleton";
+import styles from "./styles.module.scss";
 
 type LottoDrawListProps = {
   limit: number
@@ -91,7 +93,11 @@ export const LottoDrawList: FC<LottoDrawListProps> = ({ limit }) => {
             }}
             data-index={virtualRow.index}
           >
-            {content ? <LottoDraw {...content} /> : <LottoDrawSkeleton/>}
+            {content ? (
+              <Link className={styles.link} to={`/draws/${content.draw}`}>
+                <LottoDraw {...content} />
+              </Link>
+            ) : <LottoDrawSkeleton/>}
           </div>
         );
       })}
