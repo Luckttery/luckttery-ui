@@ -6,11 +6,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import globalStyles from "~/styles/global.scss?url";
 import "react-loading-skeleton/dist/skeleton.css";
 import { SkeletonTheme } from "react-loading-skeleton";
+import { useDehydratedState } from "use-dehydrated-state";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -58,14 +59,18 @@ export default function App() {
       }),
   )
 
+  const dehydratedState = useDehydratedState();
+
   return (
     <QueryClientProvider client={queryClient}>
-      <SkeletonTheme
-        baseColor="var(--skeleton-base)"
-        highlightColor="var(--skeleton-highlight)"
-      >
-        <Outlet />
-      </SkeletonTheme>
+      <HydrationBoundary state={dehydratedState}>
+        <SkeletonTheme
+          baseColor="var(--skeleton-base)"
+          highlightColor="var(--skeleton-highlight)"
+        >
+          <Outlet />
+        </SkeletonTheme>
+      </HydrationBoundary>
     </QueryClientProvider>
   );
 }

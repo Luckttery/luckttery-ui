@@ -26,3 +26,8 @@ export const fetchDraws = async (cursor: number | string | undefined, limit: num
   const response = await lucktteryClient.get(`/lotto/draws`, { params: request });
   return response.data;
 }
+
+export const fetchDraw = async (draw: number): Promise<LottoDrawResponse> => {
+  const response = await lucktteryClient.get(`/lotto/draws/${draw}`);
+  return response.data;
+}
