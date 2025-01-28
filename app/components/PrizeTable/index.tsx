@@ -19,18 +19,25 @@ const PRIZE_KEYS = [
 ] as const;
 
 const calculateTax = (amount: number): number => {
+  const LOTTO_COST = 1000;
   const LIMIT_300M = 300000000;
-  return amount <= LIMIT_300M 
-    ? amount * 0.78 
-    : amount - (LIMIT_300M * 0.22 + (amount - LIMIT_300M) * 0.33);
-};
+  const taxableAmount = amount - LOTTO_COST;
+
+  if (taxableAmount <= 2000000) {
+    return amount;
+  }
+
+  return taxableAmount <= LIMIT_300M 
+    ? taxableAmount * 0.78 + LOTTO_COST
+    : taxableAmount - (LIMIT_300M * 0.22 + (taxableAmount - LIMIT_300M) * 0.33) + LOTTO_COST;
+}
 
 const formatKRW = (amount: number): string => {
   return new Intl.NumberFormat('ko-KR', {
     style: 'currency',
     currency: 'KRW'
   }).format(amount);
-};
+}
 
 export const PrizeTable: FC<PrizeTableProps> = (props) => {
   return (
@@ -62,3 +69,5 @@ export const PrizeTable: FC<PrizeTableProps> = (props) => {
     </div>
   );
 }
+
+export default PrizeTable;
