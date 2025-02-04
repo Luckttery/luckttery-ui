@@ -12,6 +12,8 @@ import globalStyles from "~/styles/global.scss?url";
 import "react-loading-skeleton/dist/skeleton.css";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { useDehydratedState } from "use-dehydrated-state";
+import AppBar from "./components/AppBar";
+import Container from "./components/Container";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -37,7 +39,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <header>
+          <AppBar />
+        </header>
+        <Container>
+          {children}
+        </Container>
         <ScrollRestoration />
         <Scripts />
       </body>

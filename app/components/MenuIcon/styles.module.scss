@@ -1,0 +1,45 @@
+.container {
+  padding: 1rem;
+}
+
+.button {
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.line {
+  transition: transform 0.3s ease, opacity 0.3s ease, stroke-dasharray 0.3s ease;
+  transform-origin: left center;
+  stroke-dasharray: 16;
+}
+
+.openTop {
+  transform: translateY(0) rotate(0);
+}
+
+.closeTop {
+  transform: translateX(4px) translateY(7px) rotate(-30deg);
+  stroke-dasharray: 8;
+}
+
+.openBottom {
+  transform: translateY(0) rotate(0);
+}
+
+.closeBottom {
+  transform: translateX(4px) translateY(-7px) rotate(30deg);
+  stroke-dasharray: 8;
+}
