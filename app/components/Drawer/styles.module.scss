@@ -1,0 +1,63 @@
+.drawerWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 901;
+  display: flex;
+  pointer-events: none;
+}
+
+.drawerOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 900;
+}
+
+.drawerContent {
+  position: fixed;
+  top: 0;
+  left: -350px;
+  width: 300px;
+  height: 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  z-index: 1101;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Drawer가 열릴 때 */
+.open {
+  left: 0;
+  pointer-events: auto;
+}
+
+/* Header */
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.drawerTitle {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Drawer Body */
+.drawerBody {
+  flex: 1;
+  padding-top: 10px;
+  color: var(--text-color);
+}

@@ -15,6 +15,7 @@
   --paper-shadow-color: rgba(0, 0, 0, 0.2);
   --skeleton-base: #e0e0e0;
   --skeleton-highlight: #f0f0f0;
+  --app-bar-border-color: #e5e7eb;
 
   @media (prefers-color-scheme: dark) {
     --background-color: #0a0a0a;
@@ -32,6 +33,7 @@
     --paper-shadow-color: rgba(0, 0, 0, 0.6);
     --skeleton-base: #303030;
     --skeleton-highlight: #505050;
+    --app-bar-border-color: #4b5563;
   }
 }
 

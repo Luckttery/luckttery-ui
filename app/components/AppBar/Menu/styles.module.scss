@@ -1,0 +1,51 @@
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.menuButton {
+  width: 48px;
+  height: 48px;
+  padding: 0 !important;
+}
+
+.nav {
+  margin-top: 25px;
+  padding-top: 10px;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menuItem {
+  position: relative;
+  margin: 20px 0;
+}
+
+.menuLink {
+  display: flex;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 18px;
+  color: var(--text-color);
+
+  &:hover {
+    .indicator {
+      opacity: 1;
+    }
+  }
+}
+
+.indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--primary-color);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
