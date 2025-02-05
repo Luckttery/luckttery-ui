@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1100;
+  z-index: 1300;
 }
 
 .modalOverlay {
@@ -23,8 +23,8 @@
   padding: 1.5rem;
   box-shadow: var(--modal-shadow);
   border: 1px solid var(--border-color);
-  z-index: 51;
-  
+  z-index: 1301;
+
   @media (max-width: 640px) {
     max-width: 90%;
     margin: 1rem;
@@ -75,7 +75,9 @@
 
 .modalBody {
   margin-top: 0.5rem;
+  max-height: 80vh;
   color: var(--modal-text);
+  overflow: auto;
 }
 
 // Animations
