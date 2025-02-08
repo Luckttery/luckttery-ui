@@ -5,13 +5,17 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigation,
 } from "@remix-run/react";
 import { HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
-import globalStyles from "~/styles/global.scss?url";
-import "react-loading-skeleton/dist/skeleton.css";
+import NProgress from "nprogress";
+import 'nprogress/nprogress.css';
+import { useEffect, useState } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { useDehydratedState } from "use-dehydrated-state";
+import globalStyles from "~/styles/global.scss?url";
+import nprogressStyles from "~/styles/nprogress.scss?url";
 import AppBar from "./components/AppBar";
 import Container from "./components/Container";
 
@@ -27,9 +31,22 @@ export const links: LinksFunction = () => [
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
   { rel: "stylesheet", href: globalStyles },
+  { rel: "stylesheet", href: nprogressStyles },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const navigation = useNavigation();
+
+  NProgress.configure({ showSpinner: false, speed: 250 });
+  
+  useEffect(() => {
+    if (navigation.state === "loading") {
+      NProgress.start();
+    } else {
+      NProgress.done();
+    }
+  }, [navigation.state]);
+
   return (
     <html lang="ko">
       <head>

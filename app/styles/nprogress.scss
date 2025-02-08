@@ -1,0 +1,8 @@
+#nprogress {
+  position: fixed;
+  z-index: 2000;
+}
+
+#nprogress .bar {
+  background: var(--primary-color);
+}
