@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import LottoBall from '~/components/LottoBall';
 import styles from './styles.module.scss';
 
@@ -7,7 +7,7 @@ type LottoSetProps = {
   bonusNumber?: number;
 };
 
-const LottoSet: React.FC<LottoSetProps> = ({ numbers, bonusNumber }) => {
+const LottoSet: FC<LottoSetProps> = ({ numbers, bonusNumber }) => {
   const sortedNumbers = [...numbers].sort((a, b) => a - b);
 
   return (
