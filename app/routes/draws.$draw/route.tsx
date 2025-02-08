@@ -66,7 +66,9 @@ export const DrawDetailPage = () => {
       <p>추첨일자: {drawDetail!.date.toString()}</p>
       <Paper className={styles.margin} elevation={4}>
         <h2>당첨 번호</h2>
-        <LottoSet numbers={drawDetail!.numbers} bonusNumber={drawDetail!.bonus_number} />
+        <div className={styles.lottoSet}>
+          <LottoSet numbers={drawDetail!.numbers} bonusNumber={drawDetail!.bonus_number} />
+        </div>
       </Paper>
       <Paper className={styles.margin} elevation={4}>
         <h2>등수별 당첨금</h2>

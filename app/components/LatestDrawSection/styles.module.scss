@@ -5,11 +5,14 @@
   gap: 24px;
 }
 
-.title {
-  margin: 0;
-}
-
 .highlight {
   color: #FF6868;
   font-weight: bold;
+}
+
+.lottoSet {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
 }

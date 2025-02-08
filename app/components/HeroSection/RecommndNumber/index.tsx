@@ -41,7 +41,7 @@ export const RecommendNumber: React.FC<RecommendNumberProps> = ({
           <LottoSet numbers={set} key={index} />
         ))
       )}
-      <Button onClick={() => refetch()}>새로고침</Button>
+      <Button fullWidth onClick={() => refetch()}>새로고침</Button>
     </div>
   );
 }
