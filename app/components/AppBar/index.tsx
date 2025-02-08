@@ -27,8 +27,8 @@ export const AppBar = () => {
         {!isMobile && (
           <nav className={styles.nav}>
             <ul>
-              {menus.map(({ name, href }) => (
-                <li>
+              {menus.map(({ name, href }, index) => (
+                <li key={index}>
                   <Link to={href}><span>{name}</span></Link>
                 </li>
               ))}

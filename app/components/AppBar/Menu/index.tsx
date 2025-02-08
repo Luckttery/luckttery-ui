@@ -35,8 +35,8 @@ export const Menu: FC<MenuProps> = ({ menus }) => {
       <Drawer isOpen={isOpen} onClose={closeMenu}>
         <nav className={styles.nav}>
           <ul className={styles.menuList}>
-            {menus.map(({ name, href }) => (
-              <li className={styles.menuItem}>
+            {menus.map(({ name, href }, index) => (
+              <li key={index} className={styles.menuItem}>
                 <Link className={styles.menuLink} to={href} onClick={toggleMenu}>
                   <span className={styles.name}>{name}</span>
                   <span className={styles.indicator} />
