@@ -12,6 +12,120 @@
   gap: 16px;
 }
 
+.rangeContainer {
+  margin-top: 8px;
+}
+
+.rangeLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--paper-text-color);
+  position: relative;
+}
+
+.labelWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.infoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    color: var(--primary-color);
+    transform: scale(1.15);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: #9ca3af;
+    
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  &::after {
+    content: attr(title);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    white-space: normal;
+    width: 280px;
+    text-align: left;
+    line-height: 1.5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1001;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &::after {
+      background-color: rgba(30, 30, 30, 0.95);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    
+    &::before {
+      border-top-color: rgba(30, 30, 30, 0.95);
+    }
+  }
+}
+
+.rangeDescription {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--primary-color);
+  margin-top: 2px;
+}
+
 .rangeTrack {
   height: 6px;
   background-color: #ccc;
