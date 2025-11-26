@@ -45,11 +45,18 @@ export const meta: MetaFunction<typeof loader> = ({
     { title: `Luckttery | ${data.draw}회차 당첨 결과` },
     { name: "description", content: `로또 ${data.draw}회차 당첨 결과를 확인해보세요.` },
     { name: "keywords", content: `Luckttery, 로또, 로또645, 로또6/45, 6/45 로또, 당첨 결과, 로또 ${data.draw}회차, ${data.draw}회차 당첨 결과` },
+    { tagName: "link", rel: "canonical", href: `https://luckttery.com/draws/${data.draw}` },
     { property: "og:title", content: `Luckttery | ${data.draw}회차 당첨 결과` },
     { property: "og:description", content: `로또 ${data.draw}회차 당첨 결과를 확인해보세요.` },
     { property: "og:type", content: "website"},
     { property: "og:url", content: `https://luckttery.com/draws/${data.draw}` },
-    { property: "og:image", content: "https://luckttery.com/android-chrome-512x512.png" }
+    { property: "og:image", content: "https://luckttery.com/android-chrome-512x512.png" },
+    { property: "og:site_name", content: "Luckttery" },
+    { property: "og:locale", content: "ko_KR" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: `Luckttery | ${data.draw}회차 당첨 결과` },
+    { name: "twitter:description", content: `로또 ${data.draw}회차 당첨 결과를 확인해보세요.` },
+    { name: "twitter:image", content: "https://luckttery.com/android-chrome-512x512.png" }
   ];
 };
 

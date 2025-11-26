@@ -12,11 +12,18 @@ export const meta: MetaFunction = () => {
     { title: "Luckttery | 로또 당첨번호 모아보기" },
     { name: "description", content: "로또 회차별 당첨번호를 한 곳에서 조회해보세요." },
     { name: "keywords", content: "Luckttery, 로또, 로또645, 로또6/45, 6/45 로또, 로또 당첨번호, 로또 화차별 당첨번호" },
+    { tagName: "link", rel: "canonical", href: "https://luckttery.com/draws" },
     { property: "og:title", content: "Luckttery | 로또 당첨번호 모아보기"},
     { property: "og:description", content: "로또 회차별 당첨번호를 한 곳에서 조회해보세요."},
     { property: "og:type", content: "website"},
     { property: "og:url", content: "https://luckttery.com/draws" },
-    { property: "og:image", content: "https://luckttery.com/android-chrome-512x512.png" }
+    { property: "og:image", content: "https://luckttery.com/android-chrome-512x512.png" },
+    { property: "og:site_name", content: "Luckttery" },
+    { property: "og:locale", content: "ko_KR" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "Luckttery | 로또 당첨번호 모아보기" },
+    { name: "twitter:description", content: "로또 회차별 당첨번호를 한 곳에서 조회해보세요." },
+    { name: "twitter:image", content: "https://luckttery.com/android-chrome-512x512.png" }
   ];
 }
 

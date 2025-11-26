@@ -4,6 +4,7 @@ import { XMLBuilder } from "fast-xml-parser";
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
   const baseUrl = `${url.protocol}//${url.host}`;
+  const today = new Date().toISOString().split('T')[0];
 
   const urlset = {
     '?xml': {
@@ -15,11 +16,11 @@ export const loader: LoaderFunction = async ({ request }) => {
       url: [
         {
           loc: `${baseUrl}`,
-          lastmod: '2025-02-05',
+          lastmod: today,
         },
         {
           loc: `${baseUrl}/draws`,
-          lastmod: '2025-02-05',
+          lastmod: today,
         },
       ],
     },
