@@ -15,11 +15,18 @@ export const meta: MetaFunction = () => {
     { title: "Luckttery | 로또 번호 & 로또 판매점 찾기" },
     { name: "description", content: "Luckttery에서 로또 번호를 특별하게 생성하고, 지난 회차 당첨 번호를 확인하며, 로또 판매점 위치를 지도에서 찾아보세요!" },
     { name: "keywords", content: "Luckttery, 로또, 6/45 로또, 로또 번호 생성, 로또 판매점 찾기, 로또 판매점 조회, 로또 번호, 로또 당첨 번호, 로또 지도, 로또 판매점 지도" },
+    { tagName: "link", rel: "canonical", href: "https://luckttery.com" },
     { property: "og:title", content: "Luckttery | 로또 번호 & 로또 판매점 찾기"},
     { property: "og:description", content: "Luckttery에서 로또 번호를 특별하게 생성하고, 지난 회차 당첨 번호를 확인하며, 로또 판매점 위치를 지도에서 찾아보세요!"},
     { property: "og:type", content: "website"},
     { property: "og:url", content: "https://luckttery.com" },
-    { property: "og:image", content: "https://luckttery.com/android-chrome-512x512.png" }
+    { property: "og:image", content: "https://luckttery.com/android-chrome-512x512.png" },
+    { property: "og:site_name", content: "Luckttery" },
+    { property: "og:locale", content: "ko_KR" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "Luckttery | 로또 번호 & 로또 판매점 찾기" },
+    { name: "twitter:description", content: "Luckttery에서 로또 번호를 특별하게 생성하고, 지난 회차 당첨 번호를 확인하며, 로또 판매점 위치를 지도에서 찾아보세요!" },
+    { name: "twitter:image", content: "https://luckttery.com/android-chrome-512x512.png" }
   ];
 };
 
