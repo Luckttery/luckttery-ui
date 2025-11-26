@@ -7,6 +7,7 @@ import RecommendOptionForm from "~/components/HeroSection/RecommendOptionForm";
 import LatestDrawSection from "~/components/LatestDrawSection";
 import NearbyStoresMap from "~/components/NearByStoresMap";
 import Paper from "~/components/Paper";
+import FAQ from "~/components/FAQ";
 import styles from "./styles.module.scss";
 
 export const meta: MetaFunction = () => {
@@ -51,6 +52,9 @@ export default function Index() {
         <LatestDrawSection />
       </Paper>
       <NearbyStoresMap />
+      <Paper elevation={4} className={styles.margin}>
+        <FAQ />
+      </Paper>
     </div>
   );
 }
