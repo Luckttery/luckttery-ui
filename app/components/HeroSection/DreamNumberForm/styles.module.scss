@@ -1,0 +1,198 @@
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.dreamInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dreamLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+
+  @media (prefers-color-scheme: dark) {
+    color: #e0e0e0;
+  }
+}
+
+.labelWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.infoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+  color: #666;
+  transition: color 0.2s;
+
+  @media (prefers-color-scheme: dark) {
+    color: #999;
+  }
+
+  &:hover {
+    color: #007aff;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.dreamDescription {
+  font-size: 12px;
+  color: #666;
+  font-weight: normal;
+
+  @media (prefers-color-scheme: dark) {
+    color: #999;
+  }
+}
+
+.dreamTextarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  background: white;
+  color: #333;
+
+  @media (prefers-color-scheme: dark) {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #404040;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #007aff;
+  }
+
+  &::placeholder {
+    color: #999;
+
+    @media (prefers-color-scheme: dark) {
+      color: #666;
+    }
+  }
+}
+
+.resultContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.matchedNumbers {
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+
+  @media (prefers-color-scheme: dark) {
+    background: #2a2a2a;
+  }
+
+  h3 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #333;
+
+    @media (prefers-color-scheme: dark) {
+      color: #e0e0e0;
+    }
+  }
+}
+
+.numberBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.matchInfo {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+
+  @media (prefers-color-scheme: dark) {
+    color: #999;
+  }
+}
+
+.noMatch {
+  text-align: center;
+  padding: 16px;
+  background: #fff3cd;
+  border-radius: 8px;
+  color: #856404;
+
+  @media (prefers-color-scheme: dark) {
+    background: #3a3020;
+    color: #ffcc80;
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+.lottoSets {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lottoSetWrapper {
+  padding: 16px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+
+  @media (prefers-color-scheme: dark) {
+    background: #2a2a2a;
+    border-color: #404040;
+  }
+}
+
+.setLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 12px;
+
+  @media (prefers-color-scheme: dark) {
+    color: #999;
+  }
+}
