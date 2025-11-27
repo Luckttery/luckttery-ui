@@ -1,5 +1,21 @@
 .container {
   text-align: center;
+  transition: box-shadow 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: #1a1a1a;
+  
+  span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+    margin-left: 8px;
+  }
 }
 
 .lottoSet {
@@ -7,4 +23,5 @@
   margin-bottom: 20px;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 }
