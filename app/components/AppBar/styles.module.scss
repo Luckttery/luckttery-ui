@@ -48,7 +48,38 @@
   }
 
   a {
+    display: inline-block;
     text-decoration: none;
-    color: var(--text-color);
+    color: #000;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 15px;
+    position: relative;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+
+    &::after {
+      content: '→';
+      margin-left: 6px;
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+      
+      &::after {
+        transform: translateX(3px);
+      }
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    span {
+      display: inline-block;
+    }
   }
 }
