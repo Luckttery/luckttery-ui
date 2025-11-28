@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "~/components/Button";
 import InputField from "~/components/InputField";
 import { Modal } from "~/components/Modal";
+import Paper from "~/components/Paper";
 import LottoSet from "~/components/LottoSet";
 import LottoBall from "~/components/LottoBall";
 import styles from "./styles.module.scss";
@@ -81,7 +82,7 @@ export const DreamNumberForm = () => {
       >
         <div className={styles.resultContainer}>
           {matchedNumbers.length > 0 && (
-            <div className={styles.matchedNumbers}>
+            <Paper className={styles.matchedNumbers}>
               <h3>꿈에서 찾은 번호들</h3>
               <div className={styles.numberBadges}>
                 {matchedNumbers.map(num => (
@@ -91,7 +92,7 @@ export const DreamNumberForm = () => {
               <p className={styles.matchInfo}>
                 총 {matchedNumbers.length}개의 번호를 찾았습니다
               </p>
-            </div>
+            </Paper>
           )}
           {matchedNumbers.length === 0 && (
             <div className={styles.noMatch}>
@@ -100,10 +101,10 @@ export const DreamNumberForm = () => {
           )}
           <div className={styles.lottoSets}>
             {lottoSets.map((set, index) => (
-              <div key={index} className={styles.lottoSetWrapper}>
+              <Paper key={index} className={styles.lottoSetWrapper}>
                 <div className={styles.setLabel}>세트 {index + 1}</div>
                 <LottoSet numbers={set} />
-              </div>
+              </Paper>
             ))}
           </div>
         </div>
