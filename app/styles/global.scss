@@ -2,6 +2,7 @@
   --primary-color: #338EF7;
   --background-color: white;
   --text-color: black;
+  --text-secondary-color: #666;
   --modal-bg: #ffffff;
   --modal-text: #1a1a1a;
   --modal-overlay: rgba(0, 0, 0, 0.5);
@@ -20,6 +21,7 @@
   @media (prefers-color-scheme: dark) {
     --background-color: #0a0a0a;
     --text-color: white;
+    --text-secondary-color: #999;
     --modal-bg: #1f2937;
     --modal-text: #f3f4f6;
     --modal-overlay: rgba(0, 0, 0, 0.7);
