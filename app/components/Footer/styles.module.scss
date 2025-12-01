@@ -1,0 +1,28 @@
+.footer {
+  padding: 2rem 1rem;
+  text-align: center;
+  background-color: var(--surface-container-lowest);
+  color: var(--on-surface-variant);
+  font-size: 0.875rem;
+  margin-top: 2rem;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  a {
+    color: var(--on-surface-variant);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.copyright {
+  opacity: 0.8;
+}
