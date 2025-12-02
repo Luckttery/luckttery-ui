@@ -34,7 +34,6 @@ export default function PrivacyPage() {
         <p>Luckttery는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다.</p>
         <p><strong>5. 개인정보처리방침 변경</strong></p>
         <p>본 개인정보처리방침은 법령 및 방침에 따라 변경될 수 있으며, 변경 시 공지사항을 통해 고지할 것입니다.</p>
-        <p>시행일: 2023년 12월 1일</p>
       </Paper>
     </div>
   );
