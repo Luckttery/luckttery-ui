@@ -100,10 +100,7 @@ export const DreamNumberForm = () => {
           )}
           <div className={styles.lottoSets}>
             {lottoSets.map((set, index) => (
-              <div key={index} className={styles.lottoSetWrapper}>
-                <div className={styles.setLabel}>세트 {index + 1}</div>
-                <LottoSet numbers={set} />
-              </div>
+              <LottoSet key={index} numbers={set} />
             ))}
           </div>
         </div>

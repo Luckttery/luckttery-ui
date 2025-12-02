@@ -113,22 +113,11 @@
 
 .matchedNumbers {
   text-align: center;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 12px;
-
-  @media (prefers-color-scheme: dark) {
-    background: #2a2a2a;
-  }
 
   h3 {
     margin: 0 0 12px 0;
     font-size: 16px;
-    color: #333;
-
-    @media (prefers-color-scheme: dark) {
-      color: #e0e0e0;
-    }
+    color: var(--text-color);
   }
 }
 
@@ -143,11 +132,7 @@
 .matchInfo {
   margin: 0;
   font-size: 13px;
-  color: #666;
-
-  @media (prefers-color-scheme: dark) {
-    color: #999;
-  }
+  color: var(--text-secondary-color);
 }
 
 .noMatch {
@@ -175,24 +160,12 @@
 }
 
 .lottoSetWrapper {
-  padding: 16px;
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-
-  @media (prefers-color-scheme: dark) {
-    background: #2a2a2a;
-    border-color: #404040;
-  }
+  // Paper 컴포넌트가 스타일을 제공하므로 최소한의 스타일만 유지
 }
 
 .setLabel {
   font-size: 13px;
   font-weight: 600;
-  color: #666;
+  color: var(--text-secondary-color);
   margin-bottom: 12px;
-
-  @media (prefers-color-scheme: dark) {
-    color: #999;
-  }
 }
