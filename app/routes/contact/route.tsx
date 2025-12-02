@@ -74,36 +74,7 @@ export default function ContactPage() {
                 <li>기타 일반적인 질문</li>
               </ul>
             </div>
-
-            <div className={styles.inquiryCard}>
-              <h3>🤝 제휴 문의</h3>
-              <p>비즈니스 제휴나 파트너십에 관심이 있으시면 연락 주세요.</p>
-              <ul>
-                <li>제휴 목적 및 내용</li>
-                <li>회사/단체 소개</li>
-                <li>연락처 정보</li>
-              </ul>
-            </div>
           </div>
-        </section>
-
-        <section className={styles.section}>
-          <h2>⏰ 운영 시간</h2>
-          <p>이메일 문의는 24시간 접수 가능하며, 답변은 평일 운영 시간에 순차적으로 처리됩니다.</p>
-          <ul>
-            <li><strong>평일:</strong> 오전 9시 - 오후 6시</li>
-            <li><strong>주말 및 공휴일:</strong> 휴무 (문의 접수는 가능하며, 다음 영업일에 순차 처리)</li>
-          </ul>
-        </section>
-
-        <section className={styles.notice}>
-          <h3>📌 안내사항</h3>
-          <ul>
-            <li>문의 내용에 개인정보(주민등록번호, 계좌번호 등)를 포함하지 마세요.</li>
-            <li>욕설, 비방, 광고성 내용은 답변 없이 삭제될 수 있습니다.</li>
-            <li>문의량이 많을 경우 답변이 다소 지연될 수 있습니다.</li>
-            <li>긴급한 기술적 문제는 제목에 [긴급]을 표시해 주세요.</li>
-          </ul>
         </section>
       </Paper>
     </div>
