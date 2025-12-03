@@ -1,0 +1,173 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+}
+
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: var(--border-color);
+    top: 0;
+    
+    @media (max-width: 768px) {
+      left: 20px;
+    }
+  }
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  position: relative;
+
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    padding-left: 50px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.cardContent {
+  width: 45%;
+  background: var(--bg-paper);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    border: 4px solid var(--bg-default);
+    box-shadow: 0 0 0 2px var(--primary-color);
+    z-index: 1;
+  }
+}
+
+.cardLeft {
+  margin-right: auto;
+  
+  &::after {
+    right: -55px; // (50% - 45%) * 2 container width approx calculation or fixed spacing
+    // Actually better to position relative to the center line
+  }
+}
+
+.cardRight {
+  margin-left: auto;
+}
+
+// Positioning the dots correctly
+.card:nth-child(odd) .cardContent {
+  margin-right: auto;
+  
+  &::after {
+    right: calc(-1 * (5% + 21px)); // Adjust based on gap
+    @media (max-width: 768px) {
+      left: -41px;
+      right: auto;
+    }
+  }
+}
+
+.card:nth-child(even) .cardContent {
+  margin-left: auto;
+
+  &::after {
+    left: calc(-1 * (5% + 21px));
+    @media (max-width: 768px) {
+      left: -41px;
+    }
+  }
+}
+
+.flag {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.countryName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.period {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.fact {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--primary-color);
+  
+  strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+  }
+}
