@@ -90,6 +90,7 @@ export default function AboutPage() {
 
         <section className={styles.disclaimer}>
           <p><small>* Luckttery는 로또 번호 생성 및 정보 제공 서비스로, 당첨을 보장하지 않습니다. 로또는 순수한 확률 게임이며, 책임감 있게 즐기시기 바랍니다.</small></p>
+          <p><small>* 본 서비스에서 제공하는 당첨 결과 및 판매점 정보는 동행복권(dhlottery.co.kr)의 공식 데이터를 기반으로 제공됩니다.</small></p>
         </section>
       </Paper>
     </div>

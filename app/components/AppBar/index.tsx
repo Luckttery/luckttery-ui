@@ -10,6 +10,7 @@ export const AppBar = () => {
   const menus = [
     { name: '회차별 당첨번호', href: '/draws' },
     { name: '꿈 해몽', href: '/dream' },
+    { name: '로또 역사', href: '/history' },
   ];
   
   return (

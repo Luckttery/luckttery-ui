@@ -38,6 +38,43 @@ export default function Dream() {
           <li>매칭된 번호들로 로또 세트를 자동 생성합니다</li>
         </ul>
       </div>
+
+      <div className={styles.infoSection}>
+        <h2 className={styles.infoTitle}>📚 자주 찾는 꿈 해몽 숫자</h2>
+        <div className={styles.dreamTable}>
+          <div className={styles.dreamRow}>
+            <span className={styles.dreamKeyword}>🐷 돼지</span>
+            <span className={styles.dreamDesc}>재물과 행운의 상징</span>
+            <span className={styles.dreamNumbers}>8, 12, 24, 33</span>
+          </div>
+          <div className={styles.dreamRow}>
+            <span className={styles.dreamKeyword}>💩 똥/배설물</span>
+            <span className={styles.dreamDesc}>금전운 상승</span>
+            <span className={styles.dreamNumbers}>2, 9, 15, 28</span>
+          </div>
+          <div className={styles.dreamRow}>
+            <span className={styles.dreamKeyword}>🔥 불</span>
+            <span className={styles.dreamDesc}>사업 번창, 재산 증식</span>
+            <span className={styles.dreamNumbers}>4, 19, 23, 41</span>
+          </div>
+          <div className={styles.dreamRow}>
+            <span className={styles.dreamKeyword}>🐍 뱀</span>
+            <span className={styles.dreamDesc}>지혜, 태몽, 재물</span>
+            <span className={styles.dreamNumbers}>6, 14, 25, 44</span>
+          </div>
+          <div className={styles.dreamRow}>
+            <span className={styles.dreamKeyword}>🌊 물</span>
+            <span className={styles.dreamDesc}>맑은 물은 재물운</span>
+            <span className={styles.dreamNumbers}>1, 10, 29, 38</span>
+          </div>
+          <div className={styles.dreamRow}>
+            <span className={styles.dreamKeyword}>✈️ 비행기</span>
+            <span className={styles.dreamDesc}>상승, 여행, 변화</span>
+            <span className={styles.dreamNumbers}>5, 16, 30, 42</span>
+          </div>
+        </div>
+        <p className={styles.dreamNote}>* 위 숫자는 통상적인 해몽에 기반한 예시이며, 실제 분석 결과와 다를 수 있습니다.</p>
+      </div>
     </div>
   );
 }
