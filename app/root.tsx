@@ -18,6 +18,7 @@ import globalStyles from "~/styles/global.scss?url";
 import nprogressStyles from "~/styles/nprogress.scss?url";
 import AppBar from "./components/AppBar";
 import Container from "./components/Container";
+import Footer from "./components/Footer";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -62,6 +63,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Container>
           {children}
         </Container>
+        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>
