@@ -14,7 +14,6 @@ export default function DesktopSidebarAds() {
           slot="2449601108"
           format="auto"
           responsive="true"
-          style={{ width: '100%', height: '100%' }}
         />
       </aside>
       
@@ -25,7 +24,6 @@ export default function DesktopSidebarAds() {
           slot="4279711614"
           format="autorelaxed"
           responsive="true"
-          style={{ width: '100%', height: '100%' }}
         />
       </aside>
     </>
