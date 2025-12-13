@@ -18,11 +18,11 @@ export default function DesktopSidebarAds() {
       </aside>
       
       <aside className={styles.rightSidebar}>
-        {/* Desktop_Right_Multiplex */}
+        {/* Desktop_Right_Sidebar (New Vertical) */}
         <GoogleAdSense
           key={`right-ad-${location.pathname}`}
-          slot="4279711614"
-          format="autorelaxed"
+          slot="9117939471"
+          format="auto"
           responsive="true"
         />
       </aside>
