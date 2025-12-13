@@ -24,12 +24,11 @@
   @extend .sidebarContainer;
   left: 50%;
   margin-left: 496px; /* 960px/2 + 16px gap */
-  min-width: 360px; /* Min width for AdSense to detect slot size */
+  min-width: 300px; /* Match Left Sidebar width for symmetry */
 
-  /* Hide right sidebar on screens too narrow for it (960 + 16 + 360 + margins) */
-  /* Approx 1750px to be safe/symmetric, or at least 1400px to not overlap content */
-  /* Realistically, to show 360px ad + 496px half-width, we need viewport/2 > 856 => viewport > 1712px */
-  @media (max-width: 1720px) {
+  /* Hide right sidebar on screens too narrow for it (960 + 16 + 300 + margins) */
+  /* Approx 1600px to match left sidebar behavior */
+  @media (max-width: 1600px) {
     display: none;
   }
 }
