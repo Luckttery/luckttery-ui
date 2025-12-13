@@ -12,6 +12,7 @@
   @extend .sidebarContainer;
   right: 50%;
   margin-right: 496px; /* 960px/2 + 16px gap */
+  min-width: 300px; /* Min width for AdSense to detect slot size */
 
   /* Hide left sidebar on screens too narrow for it (960/2 + 16 + 300 = 796px half-width -> 1592px full-width) */
   @media (max-width: 1600px) {
@@ -23,6 +24,7 @@
   @extend .sidebarContainer;
   left: 50%;
   margin-left: 496px; /* 960px/2 + 16px gap */
+  min-width: 360px; /* Min width for AdSense to detect slot size */
 
   /* Hide right sidebar on screens too narrow for it (960 + 16 + 360 + margins) */
   /* Approx 1750px to be safe/symmetric, or at least 1400px to not overlap content */
