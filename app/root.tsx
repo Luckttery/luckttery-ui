@@ -18,6 +18,8 @@ import globalStyles from "~/styles/global.scss?url";
 import nprogressStyles from "~/styles/nprogress.scss?url";
 import AppBar from "./components/AppBar";
 import Container from "./components/Container";
+import DesktopSidebarAds from "./components/DesktopSidebarAds";
+import BottomAd from "./components/BottomAd";
 import Footer from "./components/Footer";
 
 export const links: LinksFunction = () => [
@@ -61,9 +63,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <header>
           <AppBar />
         </header>
+        <DesktopSidebarAds />
         <Container>
           {children}
         </Container>
+        <BottomAd />
         <Footer />
         <ScrollRestoration />
         <Scripts />

@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 960px; /* Match main container width */
+  margin: 32px auto; /* Vertical spacing */
+  padding: 0 16px;
+  box-sizing: border-box;
+  min-height: 90px; /* Minimum height for Leaderboard */
+  overflow: hidden;
+}
