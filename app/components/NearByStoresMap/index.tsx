@@ -94,6 +94,7 @@ const NearbyStoresMap: React.FC = () => {
           latitude={currentPosition?.latitude ?? SEOUL_COORDINATES.latitude}
           longitude={currentPosition?.longitude ?? SEOUL_COORDINATES.longitude}
           markers={markers}
+          onCenterChanged={(lat, lng) => setCurrentPosition({ latitude: lat, longitude: lng })}
         />
         <button className={styles.currentLocationButton} onClick={updateCurrentPosition}>
           <img alt="my-location" src={myLocation} />
