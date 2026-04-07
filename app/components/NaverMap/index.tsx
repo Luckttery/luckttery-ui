@@ -26,9 +26,10 @@ type NaverMapProps = {
   latitude: number;
   longitude: number;
   markers?: MarkerData[];
+  onCenterChanged?: (latitude: number, longitude: number) => void;
 };
 
-const NaverMap: React.FC<NaverMapProps> = ({ latitude, longitude, markers }: NaverMapProps) => {
+const NaverMap: React.FC<NaverMapProps> = ({ latitude, longitude, markers, onCenterChanged }: NaverMapProps) => {
   const data = useLoaderData<typeof loader>();
   const [map, setMap] = useState<naver.maps.Map | null>(null);
 
@@ -46,6 +47,13 @@ const NaverMap: React.FC<NaverMapProps> = ({ latitude, longitude, markers }: Nav
 
       const mapInstance = new naver.maps.Map("map", mapOptions);
       setMap(mapInstance);
+
+      if (onCenterChanged) {
+        naver.maps.Event.addListener(mapInstance, 'dragend', () => {
+          const center = mapInstance.getCenter();
+          onCenterChanged(center.y, center.x);
+        });
+      }
     };
 
     const script = document.createElement("script");
