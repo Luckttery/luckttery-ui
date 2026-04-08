@@ -1,4 +1,5 @@
 import { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import type { MetaArgs } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { HttpStatusCode, isAxiosError } from 'axios';
@@ -38,9 +39,15 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   });
 }
 
-export const meta: MetaFunction<typeof loader> = ({
-  data,
-}) => {
+export const meta: MetaFunction<typeof loader> = (
+  args: MetaArgs<typeof loader>
+) => {
+  const data = args.data;
+
+  if (!data) {
+    return [];
+  }
+
   return [
     { title: `Luckttery | ${data.draw}회차 당첨 결과` },
     { name: "description", content: `로또 ${data.draw}회차 당첨 결과를 확인해보세요.` },
