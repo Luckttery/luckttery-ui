@@ -1,7 +1,7 @@
-import { LoaderFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { XMLBuilder } from "fast-xml-parser";
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const baseUrl = `${url.protocol}//${url.host}`;
 
@@ -32,4 +32,4 @@ export const loader: LoaderFunction = async ({ request }) => {
       "Content-Type": "application/xml",
     },
   });
-}
+};
