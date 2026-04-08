@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLoaderData } from "@remix-run/react";
 import { loader } from "~/routes/_index/route";
 
@@ -32,47 +32,114 @@ type NaverMapProps = {
 const NaverMap: React.FC<NaverMapProps> = ({ latitude, longitude, markers, onCenterChanged }: NaverMapProps) => {
   const data = useLoaderData<typeof loader>();
   const [map, setMap] = useState<naver.maps.Map | null>(null);
+  const isInitializingRef = useRef(false);
+  const markerInstancesRef = useRef<naver.maps.Marker[]>([]);
+  const dragEndListenerRef = useRef<naver.maps.MapEventListener | null>(null);
 
   useEffect(() => {
-    const loadNaverMap = () => {
-      if (typeof naver === "undefined" || !naver.maps) {
-        console.error("Naver Maps API가 로드되지 않았습니다.");
+    const ensureNaverMapsLoaded = async () => {
+      if (typeof window === "undefined") {
         return;
       }
 
-      const mapOptions = {
+      if (typeof naver !== "undefined" && naver.maps) {
+        return;
+      }
+
+      await new Promise<void>((resolve, reject) => {
+        const existing = document.querySelector<HTMLScriptElement>('script[data-naver-maps="true"]');
+        if (existing) {
+          existing.addEventListener("load", () => resolve(), { once: true });
+          existing.addEventListener("error", () => reject(new Error("Naver Maps script load failed")), { once: true });
+          return;
+        }
+
+        const script = document.createElement("script");
+        script.dataset.naverMaps = "true";
+        script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${data.ENV.NAVER_MAP_CLIENT_ID}`;
+        script.async = true;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error("Naver Maps script load failed"));
+        document.body.appendChild(script);
+      });
+    };
+
+    const initMap = async () => {
+      if (isInitializingRef.current) {
+        return;
+      }
+
+      isInitializingRef.current = true;
+      try {
+        await ensureNaverMapsLoaded();
+      } catch (error) {
+        console.error("Naver Maps API가 로드되지 않았습니다.", error);
+        isInitializingRef.current = false;
+        return;
+      }
+
+      if (typeof naver === "undefined" || !naver.maps) {
+        console.error("Naver Maps API가 로드되지 않았습니다.");
+        isInitializingRef.current = false;
+        return;
+      }
+
+      const mapInstance = new naver.maps.Map("map", {
         center: new naver.maps.LatLng(latitude, longitude),
         zoom: 16,
-      };
+      });
 
-      const mapInstance = new naver.maps.Map("map", mapOptions);
       setMap(mapInstance);
-
-      if (onCenterChanged) {
-        naver.maps.Event.addListener(mapInstance, 'dragend', () => {
-          const center = mapInstance.getCenter();
-          onCenterChanged(center.y, center.x);
-        });
-      }
+      isInitializingRef.current = false;
     };
 
-    const script = document.createElement("script");
-    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${data.ENV.NAVER_MAP_CLIENT_ID}`;
-    script.async = true;
-    script.onload = loadNaverMap;
-    document.body.appendChild(script);
+    if (!map) {
+      void initMap();
+    }
+  }, [data.ENV.NAVER_MAP_CLIENT_ID, latitude, longitude, map]);
+
+  useEffect(() => {
+    if (!map) {
+      return;
+    }
+
+    map.setCenter(new naver.maps.LatLng(latitude, longitude));
+  }, [map, latitude, longitude]);
+
+  useEffect(() => {
+    if (!map) {
+      return;
+    }
+
+    if (dragEndListenerRef.current) {
+      naver.maps.Event.removeListener(dragEndListenerRef.current);
+      dragEndListenerRef.current = null;
+    }
+
+    if (!onCenterChanged) {
+      return;
+    }
+
+    dragEndListenerRef.current = naver.maps.Event.addListener(map, "dragend", () => {
+      const center = map.getCenter();
+      onCenterChanged(center.y, center.x);
+    });
 
     return () => {
-      if (script) {
-        document.body.removeChild(script);
+      if (dragEndListenerRef.current) {
+        naver.maps.Event.removeListener(dragEndListenerRef.current);
+        dragEndListenerRef.current = null;
       }
     };
-  }, [latitude, longitude, data.ENV.NAVER_MAP_CLIENT_ID]);
+  }, [map, onCenterChanged]);
 
   useEffect(() => {
     if (!map) {
       return
     }
+
+    markerInstancesRef.current.forEach((marker) => marker.setMap(null));
+    markerInstancesRef.current = [];
 
     markers?.forEach((marker) => {
       const position = new naver.maps.LatLng(marker.latitude, marker.longitude);
@@ -91,6 +158,8 @@ const NaverMap: React.FC<NaverMapProps> = ({ latitude, longitude, markers, onCen
         title: marker.title,
         icon,
       });
+
+      markerInstancesRef.current.push(mapMarker);
 
       if (marker.infoWindow) {
         const infoWindow = new naver.maps.InfoWindow(marker.infoWindow as naver.maps.InfoWindowOptions);
