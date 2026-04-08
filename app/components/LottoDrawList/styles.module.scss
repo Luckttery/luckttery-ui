@@ -15,3 +15,22 @@
     transform: translateY(-2px);
   }
 }
+
+.adContainer {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.ad {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: 140px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
