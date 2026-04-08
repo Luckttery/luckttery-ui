@@ -13,6 +13,13 @@ export const Drawer = ({ isOpen, onClose, children, title }: DrawerProps) => {
   const drawerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
 
+  const handleOverlayKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onClose();
+    }
+  };
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -47,7 +54,16 @@ export const Drawer = ({ isOpen, onClose, children, title }: DrawerProps) => {
 
   const drawer = (
     <div className={`${styles.drawerWrapper} ${isOpen && styles.open}`}>
-      {isOpen && <div className={styles.drawerOverlay} onClick={onClose} />}
+      {isOpen && (
+        <div
+          className={styles.drawerOverlay}
+          onClick={onClose}
+          onKeyDown={handleOverlayKeyDown}
+          role="button"
+          tabIndex={0}
+          aria-label="닫기"
+        />
+      )}
       
       <div ref={drawerRef} className={`${styles.drawerContent} ${isOpen && styles.open}`}>
         <div className={styles.drawerHeader}>

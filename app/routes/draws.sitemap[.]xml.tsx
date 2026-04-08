@@ -13,13 +13,13 @@ export const loader: LoaderFunction = async ({ request }) => {
   }
 
   const latestDrawNumber = latestDraw.draw;
-  let lastmodDate = new Date(latestDraw.date);
   const numberOfUrls = Math.min(latestDrawNumber, 52);
 
   const urls = Array.from({ length: numberOfUrls }, (_, i) => {
     const draw = latestDrawNumber - i;
+    const lastmodDate = new Date(latestDraw.date);
+    lastmodDate.setDate(lastmodDate.getDate() - (i * 7));
     const lastmod = lastmodDate.toISOString().split("T")[0];
-    lastmodDate.setDate(lastmodDate.getDate() - 7);
 
     return { loc: `${baseUrl}/draws/${draw}`, lastmod };
   });
@@ -45,4 +45,4 @@ export const loader: LoaderFunction = async ({ request }) => {
       "Content-Type": "application/xml",
     },
   });
-}
+};

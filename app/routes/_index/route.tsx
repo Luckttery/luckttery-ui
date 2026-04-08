@@ -1,5 +1,4 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { fetchLatest } from "~/api/lucktteryApi/api";
 import Intro from "~/components/HeroSection/Intro";
@@ -47,8 +46,6 @@ export const loader = async () => {
 };
 
 export default function Index() {
-  const { dehydratedState } = useLoaderData<typeof loader>();
-
   return (
     <div className={styles.container}>
       <Intro title="당신의 행운 로또 도우미" subtitle="행운의 번호 생성, 당첨 결과 확인, 판매점 찾기까지 모두 한 곳에서!" />
@@ -65,6 +62,5 @@ export default function Index() {
     </div>
   );
 }
-
 
 

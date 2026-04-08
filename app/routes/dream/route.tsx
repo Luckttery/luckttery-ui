@@ -33,7 +33,7 @@ export default function Dream() {
         <h2 className={styles.infoTitle}>💡 이렇게 사용해보세요</h2>
         <ul className={styles.infoList}>
           <li>꿈에 나온 사물, 동물, 음식 등을 자유롭게 적어주세요</li>
-          <li>예: "돼지가 똥을 싸고, 호박을 먹었어요"</li>
+          <li>예: &quot;돼지가 똥을 싸고, 호박을 먹었어요&quot;</li>
           <li>키워드를 분석하여 관련 번호를 찾아드립니다</li>
           <li>매칭된 번호들로 로또 세트를 자동 생성합니다</li>
         </ul>
