@@ -1,13 +1,9 @@
-import { LottoDrawResponse } from "~/api/lucktteryApi/types";
 import styles from "./styles.module.scss";
 import LottoSet from "../LottoSet";
 import { useQuery } from "@tanstack/react-query";
 import { fetchLatest } from "~/api/lucktteryApi/api";
 
-type LatestDrawSectionProps = {
-}
-
-export const LatestDrawSection: React.FC<LatestDrawSectionProps> = () => {
+export const LatestDrawSection = () => {
   const { data: draw } = useQuery({
     queryKey: ['latestDraw'],
     queryFn: fetchLatest,

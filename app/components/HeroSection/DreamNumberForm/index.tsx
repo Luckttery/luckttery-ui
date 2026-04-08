@@ -41,7 +41,7 @@ export const DreamNumberForm = () => {
     <div className={styles.container}>
       <form className={styles.form} method="get" onSubmit={handleSubmit}>
         <div className={styles.dreamInputContainer}>
-          <label className={styles.dreamLabel}>
+          <label className={styles.dreamLabel} htmlFor="dream-text">
             <span className={styles.labelWithIcon}>
               꿈 내용 입력
               <span className={styles.infoIcon} title="꿈에서 본 사물, 동물, 음식, 행동 등을 자유롭게 적어주세요. 키워드를 분석하여 관련된 번호를 추천해드립니다!">
@@ -57,6 +57,7 @@ export const DreamNumberForm = () => {
             </span>
           </label>
           <textarea 
+            id="dream-text"
             className={styles.dreamTextarea}
             placeholder="꿈 내용을 자유롭게 입력해주세요..."
             value={dreamText}

@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
-import { HttpStatusCode } from 'axios';
+import { HttpStatusCode, isAxiosError } from 'axios';
 import { fetchDraw } from "~/api/lucktteryApi/api";
 import LottoSet from "~/components/LottoSet";
 import styles from "./styles.module.scss";
@@ -20,12 +20,12 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   const draw = parseInt(drawParam, 10);
 
   try {
-    const result = await queryClient.fetchQuery({
+    await queryClient.fetchQuery({
       queryKey: ['draw', draw],
       queryFn: () => fetchDraw(Number(draw)),
     })
-  } catch (err: any) {
-    if (err.isAxiosError) {
+  } catch (err: unknown) {
+    if (isAxiosError(err)) {
       throw new Response(err.response?.data, { status: err.response?.status, statusText: 'Not Found' });
     } else {
       throw new Response(null, { status: HttpStatusCode.BadGateway, statusText: 'Bad Gateway' });

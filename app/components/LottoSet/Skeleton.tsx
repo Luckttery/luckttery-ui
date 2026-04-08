@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import LottoBall from '~/components/LottoBall';
 import styles from './styles.module.scss';
 import SkeletonLottoBall from '../LottoBall/Skeleton';
 

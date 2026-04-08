@@ -8,13 +8,13 @@
 1. Install the [Netlify CLI](https://docs.netlify.com/cli/get-started/):
 
 ```sh
-npm i -g netlify-cli
+pnpm add -g netlify-cli
 ```
 
 If you have previously installed the Netlify CLI, you should update it to the latest version:
 
 ```sh
-npm i -g netlify-cli@latest
+pnpm add -g netlify-cli@latest
 ```
 
 2. Sign up and log in to Netlify:
@@ -34,7 +34,7 @@ netlify init
 Ensure all packages are installed by running:
 
 ```sh
-npm install
+pnpm install
 ```
 
 Run
